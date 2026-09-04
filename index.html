@@ -1,6 +1,9 @@
 <!DOCTYPE html>
+
 <html lang="vi">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -8,29 +11,48 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>GROVA HOLDINGS - Báo giá thang máy</title>
+  <meta
+    name="theme-color"
+    content="#087a55"
+  >
 
-  <link rel="stylesheet" href="style.css">
+  <title>
+    GROVA HOLDINGS - Báo giá thang máy
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
 </head>
+
 
 <body>
 
-<header class="header">
+
+<!-- =====================================
+     HEADER
+===================================== -->
+
+<header class="top-header">
 
   <div class="brand">
 
-    <div class="logo">
+    <div class="brand-mark">
       G
     </div>
 
     <div>
-      <div class="company-name">
-        GROVA HOLDINGS
+
+      <div class="brand-name">
+        GROVA
       </div>
 
-      <div class="company-title">
-        BÁO GIÁ THANG MÁY
+      <div class="brand-sub">
+        HOLDINGS
       </div>
+
     </div>
 
   </div>
@@ -38,9 +60,15 @@
 </header>
 
 
+
+<!-- =====================================
+     WEBSITE
+===================================== -->
+
 <main class="container">
 
-  <!-- TIÊU ĐỀ -->
+
+  <!-- HERO -->
 
   <section class="hero">
 
@@ -51,32 +79,59 @@
       </div>
 
       <h1>
-        Báo giá thang máy
+        BÁO GIÁ THANG MÁY
       </h1>
 
       <p>
-        Cấu hình và tính giá tự động
+        Hệ thống cấu hình và tính giá tự động
       </p>
 
     </div>
 
-    <div class="validity">
-      Báo giá có hiệu lực
-      <strong>30 ngày</strong>
+
+    <div class="valid-box">
+
+      <span>
+        Hiệu lực báo giá
+      </span>
+
+      <strong>
+        30 ngày
+      </strong>
+
     </div>
 
   </section>
 
 
-  <!-- THÔNG TIN KHÁCH HÀNG -->
+
+  <!-- =====================================
+       KHÁCH HÀNG
+  ===================================== -->
 
   <section class="card">
 
-    <h2>
-      01. Thông tin khách hàng
-    </h2>
+    <div class="section-title">
 
-    <div class="grid">
+      <span class="number">
+        01
+      </span>
+
+      <div>
+        <h2>
+          Thông tin khách hàng
+        </h2>
+
+        <p>
+          Nhập thông tin để tạo báo giá
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="grid customer-grid">
+
 
       <div class="field">
 
@@ -108,7 +163,7 @@
       </div>
 
 
-      <div class="field">
+      <div class="field full">
 
         <label>
           Địa chỉ công trình
@@ -122,22 +177,45 @@
 
       </div>
 
+
     </div>
 
   </section>
 
 
-  <!-- CẤU HÌNH -->
+
+  <!-- =====================================
+       CẤU HÌNH
+  ===================================== -->
 
   <section class="card">
 
-    <h2>
-      02. Cấu hình thang máy
-    </h2>
+    <div class="section-title">
+
+      <span class="number">
+        02
+      </span>
+
+      <div>
+
+        <h2>
+          Cấu hình thang máy
+        </h2>
+
+        <p>
+          Chọn từng hạng mục độc lập
+        </p>
+
+      </div>
+
+    </div>
+
 
 
     <div class="grid">
 
+
+      <!-- LOẠI THANG -->
 
       <div class="field">
 
@@ -159,6 +237,9 @@
 
       </div>
 
+
+
+      <!-- TẢI TRỌNG -->
 
       <div class="field">
 
@@ -193,6 +274,9 @@
       </div>
 
 
+
+      <!-- STOP -->
+
       <div class="field">
 
         <label>
@@ -201,18 +285,41 @@
 
         <select id="stop">
 
-          <option value="4">4 Stop</option>
-          <option value="5">5 Stop</option>
-          <option value="6">6 Stop</option>
-          <option value="7">7 Stop</option>
-          <option value="8">8 Stop</option>
-          <option value="9">9 Stop</option>
-          <option value="10">10 Stop</option>
+          <option value="4">
+            4 Stop
+          </option>
+
+          <option value="5">
+            5 Stop
+          </option>
+
+          <option value="6">
+            6 Stop
+          </option>
+
+          <option value="7">
+            7 Stop
+          </option>
+
+          <option value="8">
+            8 Stop
+          </option>
+
+          <option value="9">
+            9 Stop
+          </option>
+
+          <option value="10">
+            10 Stop
+          </option>
 
         </select>
 
       </div>
 
+
+
+      <!-- CABIN -->
 
       <div class="field">
 
@@ -242,6 +349,9 @@
 
       </div>
 
+
+
+      <!-- CỬA -->
 
       <div class="field">
 
@@ -276,6 +386,9 @@
       </div>
 
 
+
+      <!-- MÁY -->
+
       <div class="field">
 
         <label>
@@ -300,12 +413,28 @@
 
       </div>
 
+
     </div>
+
 
 
     <!-- THÔNG TIN TỰ ĐỘNG -->
 
     <div class="auto-info">
+
+
+      <div>
+
+        <span>
+          Loại thang
+        </span>
+
+        <strong id="typeDisplay">
+          Thang Hố xây
+        </strong>
+
+      </div>
+
 
       <div>
 
@@ -333,41 +462,40 @@
       </div>
 
 
+    </div>
+
+
+  </section>
+
+
+
+  <!-- =====================================
+       BẢNG GIÁ
+  ===================================== -->
+
+  <section class="card">
+
+
+    <div class="section-title">
+
+      <span class="number">
+        03
+      </span>
+
       <div>
 
-        <span>
-          Loại thang
-        </span>
+        <h2>
+          Chi tiết báo giá
+        </h2>
 
-        <strong id="typeDisplay">
-          Thang Hố xây
-        </strong>
+        <p>
+          Giá được cập nhật tự động
+        </p>
 
       </div>
 
     </div>
 
-  </section>
-
-
-  <!-- CHI TIẾT GIÁ -->
-
-  <section class="card">
-
-    <div class="section-header">
-
-      <h2>
-        03. Chi tiết báo giá
-      </h2>
-
-      <button
-        id="resetBtn"
-        class="btn-reset"
-      >
-        Đặt lại
-      </button>
-
-    </div>
 
 
     <div
@@ -376,11 +504,20 @@
     ></div>
 
 
-    <div class="total">
 
-      <span>
-        TỔNG GIÁ BÁO
-      </span>
+    <div class="total-box">
+
+      <div>
+
+        <span>
+          TỔNG GIÁ BÁO
+        </span>
+
+        <small>
+          Đã bao gồm các hạng mục đã chọn
+        </small>
+
+      </div>
 
       <strong id="totalPrice">
         285.000.000 đ
@@ -388,37 +525,43 @@
 
     </div>
 
+
   </section>
 
 
-  <!-- GHI CHÚ -->
+
+  <!-- =====================================
+       GHI CHÚ
+  ===================================== -->
 
   <section class="card">
 
-    <h2>
-      04. Ghi chú
-    </h2>
 
-    <ul>
+    <div class="section-title">
+
+      <span class="number">
+        04
+      </span>
+
+      <div>
+
+        <h2>
+          Ghi chú
+        </h2>
+
+      </div>
+
+    </div>
+
+
+    <ul class="notes">
 
       <li>
-        Giá cơ bản áp dụng cho cấu hình
-        350 kg – 4 Stop – cabin inox trắng –
-        máy Torin China – điều khiển Step China.
+        Chủ đầu tư cung cấp nguồn điện 3 pha và dây nguồn đến phòng máy.
       </li>
 
       <li>
-        Số cửa tầng = Số Stop + 1.
-      </li>
-
-      <li>
-        Chủ đầu tư cung cấp nguồn điện 3 pha
-        và dây nguồn đến phòng máy.
-      </li>
-
-      <li>
-        GROVA thực hiện phần điện vận hành
-        và hệ thống của thang máy.
+        GROVA thực hiện phần điện vận hành và hệ thống điện của thang máy.
       </li>
 
       <li>
@@ -435,38 +578,459 @@
 
     </ul>
 
+
   </section>
 
+
+
+  <!-- =====================================
+       NÚT
+  ===================================== -->
 
   <div class="actions">
 
     <button
-      id="printBtn"
-      class="btn-print"
+      id="resetBtn"
+      class="btn secondary"
+      type="button"
     >
-      In / Lưu báo giá PDF
+      Đặt lại
+    </button>
+
+
+    <button
+      id="printBtn"
+      class="btn primary"
+      type="button"
+    >
+      Tạo báo giá PDF
     </button>
 
   </div>
 
+
 </main>
 
 
-<footer>
 
-  <strong>
-    GROVA HOLDINGS
-  </strong>
+<!-- =====================================
+     MẪU BÁO GIÁ IN A4
+===================================== -->
 
-  <span>
-    Giải pháp thang máy chuyên nghiệp
-  </span>
-
-</footer>
+<div
+  id="printDocument"
+  class="print-document"
+>
 
 
-<script src="data/prices.js"></script>
-<script src="script.js"></script>
+  <!-- TRANG 1 -->
+
+  <section class="print-page">
+
+
+    <header class="print-header">
+
+
+      <div class="print-brand">
+
+        <div class="print-brand-mark">
+          G
+        </div>
+
+        <div>
+
+          <strong>
+            GROVA
+          </strong>
+
+          <span>
+            HOLDINGS
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="quote-meta">
+
+        <div>
+
+          <span>
+            Số báo giá
+          </span>
+
+          <strong id="printQuoteNo">
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span>
+            Ngày báo giá
+          </span>
+
+          <strong id="printDate">
+          </strong>
+
+        </div>
+
+      </div>
+
+
+    </header>
+
+
+
+    <div class="print-heading">
+
+      <div>
+        GROVA HOLDINGS
+      </div>
+
+      <h1>
+        BÁO GIÁ THANG MÁY
+      </h1>
+
+      <p>
+        Báo giá có hiệu lực 30 ngày
+      </p>
+
+    </div>
+
+
+
+    <!-- KHÁCH -->
+
+    <div class="print-section">
+
+      <h2>
+        01. THÔNG TIN KHÁCH HÀNG
+      </h2>
+
+
+      <table class="info-table">
+
+        <tr>
+
+          <td>
+            Tên khách hàng
+          </td>
+
+          <td id="printCustomer">
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Số điện thoại
+          </td>
+
+          <td id="printPhone">
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Địa chỉ công trình
+          </td>
+
+          <td id="printAddress">
+          </td>
+
+        </tr>
+
+      </table>
+
+    </div>
+
+
+
+    <!-- CẤU HÌNH -->
+
+    <div class="print-section">
+
+      <h2>
+        02. CẤU HÌNH THANG MÁY
+      </h2>
+
+
+      <table class="config-table">
+
+
+        <tr>
+
+          <td>
+            Loại thang
+          </td>
+
+          <td id="printType">
+          </td>
+
+
+          <td>
+            Tải trọng
+          </td>
+
+          <td id="printCapacity">
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Số Stop
+          </td>
+
+          <td id="printStop">
+          </td>
+
+
+          <td>
+            Số cửa tầng
+          </td>
+
+          <td id="printDoors">
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Cabin
+          </td>
+
+          <td
+            colspan="3"
+            id="printCabin"
+          >
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Cửa tầng
+          </td>
+
+          <td
+            colspan="3"
+            id="printDoor"
+          >
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Kiểu cửa
+          </td>
+
+          <td colspan="3">
+            2 cánh mở tim
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Máy kéo
+          </td>
+
+          <td
+            colspan="3"
+            id="printMachine"
+          >
+          </td>
+
+        </tr>
+
+
+      </table>
+
+    </div>
+
+
+
+    <!-- GIÁ -->
+
+    <div class="print-section">
+
+      <h2>
+        03. CHI TIẾT BÁO GIÁ
+      </h2>
+
+
+      <table class="price-table">
+
+        <thead>
+
+          <tr>
+
+            <th>
+              Hạng mục
+            </th>
+
+            <th>
+              Thành tiền
+            </th>
+
+          </tr>
+
+        </thead>
+
+
+        <tbody id="printPriceRows">
+        </tbody>
+
+      </table>
+
+
+      <div class="print-total">
+
+        <span>
+          TỔNG GIÁ BÁO
+        </span>
+
+        <strong id="printTotal">
+        </strong>
+
+      </div>
+
+
+    </div>
+
+
+  </section>
+
+
+
+  <!-- TRANG 2 -->
+
+  <section class="print-page">
+
+
+    <div class="print-section">
+
+
+      <h2>
+        04. GHI CHÚ & ĐIỀU KIỆN
+      </h2>
+
+
+      <ul class="print-notes">
+
+        <li>
+          Chủ đầu tư cung cấp nguồn điện 3 pha và dây nguồn đến phòng máy.
+        </li>
+
+        <li>
+          GROVA thực hiện phần điện vận hành và hệ thống điện của thang máy.
+        </li>
+
+        <li>
+          Chủ đầu tư xây dựng hố thang.
+        </li>
+
+        <li>
+          Các chi phí khác đã bao gồm trong báo giá.
+        </li>
+
+        <li>
+          Báo giá có hiệu lực 30 ngày.
+        </li>
+
+      </ul>
+
+
+    </div>
+
+
+
+    <div class="signature">
+
+      <strong>
+        ĐẠI DIỆN GROVA HOLDINGS
+      </strong>
+
+      <span>
+        Giải pháp thang máy chuyên nghiệp
+      </span>
+
+    </div>
+
+
+
+    <div class="qr-area">
+
+      <div
+        id="qrcode"
+        class="qrcode"
+      ></div>
+
+      <span>
+        Quét QR để truy cập hệ thống báo giá
+      </span>
+
+    </div>
+
+
+
+    <footer class="print-footer">
+
+      <strong>
+        GROVA HOLDINGS
+      </strong>
+
+      <span>
+        Báo giá thang máy
+      </span>
+
+    </footer>
+
+
+  </section>
+
+
+</div>
+
+
+
+<!-- QR CODE -->
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"
+></script>
+
+
+<script
+  src="data/prices.js"
+></script>
+
+
+<script
+  src="script.js"
+></script>
+
 
 </body>
+
 </html>
