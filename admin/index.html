@@ -1,1 +1,2340 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+  <title>GROVA HOLDINGS — Quản lý báo giá</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f4f7f6;
+      color: #17201d;
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* =========================
+       LOGIN
+    ========================= */
+
+    #loginScreen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background:
+        radial-gradient(circle at top left, rgba(37, 150, 105, .12), transparent 35%),
+        #f4f7f6;
+    }
+
+    .login-box {
+      width: 100%;
+      max-width: 420px;
+      background: white;
+      border-radius: 20px;
+      padding: 35px;
+      box-shadow: 0 15px 50px rgba(0,0,0,.10);
+    }
+
+    .brand {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .brand-logo {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 15px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #15945d, #1b6f56);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      font-weight: 800;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 23px;
+      letter-spacing: .5px;
+    }
+
+    .brand p {
+      margin: 8px 0 0;
+      color: #74807c;
+      font-size: 14px;
+    }
+
+    .field {
+      margin-bottom: 17px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 7px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .field input {
+      width: 100%;
+      height: 48px;
+      padding: 0 14px;
+      border: 1px solid #d8e0dc;
+      border-radius: 10px;
+      outline: none;
+      background: #fff;
+    }
+
+    .field input:focus {
+      border-color: #15945d;
+      box-shadow: 0 0 0 3px rgba(21,148,93,.10);
+    }
+
+    .primary-btn {
+      width: 100%;
+      height: 50px;
+      border: 0;
+      border-radius: 10px;
+      background: #15945d;
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .primary-btn:hover {
+      background: #117b4e;
+    }
+
+    .primary-btn:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .message {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 9px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .message.error {
+      background: #fff0f0;
+      color: #b42318;
+    }
+
+    .message.success {
+      background: #ecfdf3;
+      color: #087443;
+    }
+
+    /* =========================
+       ADMIN
+    ========================= */
+
+    #adminScreen {
+      min-height: 100vh;
+    }
+
+    .topbar {
+      height: 72px;
+      background: white;
+      border-bottom: 1px solid #e5ebe8;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .mini-logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      background: linear-gradient(135deg, #15945d, #1b6f56);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+    }
+
+    .topbar-title strong {
+      display: block;
+      font-size: 16px;
+    }
+
+    .topbar-title span {
+      font-size: 12px;
+      color: #7a8581;
+    }
+
+    .logout-btn {
+      border: 1px solid #d8e0dc;
+      background: white;
+      padding: 9px 14px;
+      border-radius: 9px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .logout-btn:hover {
+      background: #f5f7f6;
+    }
+
+    .container {
+      max-width: 1450px;
+      margin: auto;
+      padding: 28px;
+    }
+
+    .page-title {
+      margin-bottom: 24px;
+    }
+
+    .page-title h2 {
+      margin: 0;
+      font-size: 27px;
+    }
+
+    .page-title p {
+      margin: 7px 0 0;
+      color: #71807a;
+    }
+
+    /* =========================
+       STATISTICS
+    ========================= */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .stat {
+      background: white;
+      border-radius: 14px;
+      padding: 20px;
+      border: 1px solid #e6ece9;
+    }
+
+    .stat-label {
+      color: #74807c;
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .stat-value {
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    /* =========================
+       FILTER
+    ========================= */
+
+    .filter-box {
+      background: white;
+      border: 1px solid #e6ece9;
+      border-radius: 14px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+
+    .filter-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr auto;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .filter-item label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 12px;
+      color: #68746f;
+      font-weight: 600;
+    }
+
+    .filter-item input {
+      width: 100%;
+      height: 43px;
+      border: 1px solid #d8e0dc;
+      border-radius: 9px;
+      padding: 0 12px;
+      outline: none;
+    }
+
+    .filter-item input:focus {
+      border-color: #15945d;
+    }
+
+    .filter-btn {
+      height: 43px;
+      border: 0;
+      padding: 0 18px;
+      border-radius: 9px;
+      background: #17201d;
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    /* =========================
+       TABLE
+    ========================= */
+
+    .table-box {
+      background: white;
+      border: 1px solid #e6ece9;
+      border-radius: 14px;
+      overflow: hidden;
+    }
+
+    .table-head {
+      padding: 17px 20px;
+      border-bottom: 1px solid #e9eeec;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .table-head strong {
+      font-size: 16px;
+    }
+
+    .table-count {
+      color: #74807c;
+      font-size: 13px;
+    }
+
+    .table-scroll {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 950px;
+    }
+
+    th {
+      text-align: left;
+      background: #f7f9f8;
+      color: #64716c;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: .3px;
+      padding: 13px 15px;
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 15px;
+      border-top: 1px solid #edf1ef;
+      font-size: 14px;
+      vertical-align: middle;
+    }
+
+    tr:hover td {
+      background: #fafcfb;
+    }
+
+    .quote-number {
+      font-weight: 800;
+      color: #138553;
+    }
+
+    .customer-name {
+      font-weight: 700;
+    }
+
+    .phone {
+      white-space: nowrap;
+    }
+
+    .price {
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .detail-btn {
+      border: 1px solid #15945d;
+      background: white;
+      color: #117b4e;
+      padding: 7px 11px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .detail-btn:hover {
+      background: #ecfdf3;
+    }
+
+    .empty {
+      padding: 55px 20px;
+      text-align: center;
+      color: #7b8782;
+    }
+
+    .loading {
+      padding: 50px 20px;
+      text-align: center;
+      color: #66736e;
+    }
+
+    /* =========================
+       MODAL
+    ========================= */
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 20, 16, .55);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal {
+      width: 100%;
+      max-width: 850px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: white;
+      border-radius: 17px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.25);
+    }
+
+    .modal-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid #e7ecea;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      background: white;
+      z-index: 2;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+    }
+
+    .close-btn {
+      border: 0;
+      background: #f2f5f3;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    .modal-body {
+      padding: 24px;
+    }
+
+    .detail-section {
+      margin-bottom: 25px;
+    }
+
+    .detail-section h4 {
+      margin: 0 0 12px;
+      font-size: 14px;
+      color: #138553;
+      border-bottom: 1px solid #e4ebe8;
+      padding-bottom: 8px;
+    }
+
+    .detail-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .detail-item {
+      background: #f7f9f8;
+      border-radius: 9px;
+      padding: 12px;
+    }
+
+    .detail-item small {
+      display: block;
+      color: #78847f;
+      margin-bottom: 5px;
+      font-size: 11px;
+    }
+
+    .detail-item strong {
+      display: block;
+      word-break: break-word;
+    }
+
+    .modal-footer {
+      padding: 17px 24px;
+      border-top: 1px solid #e7ecea;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    .modal-footer button {
+      border: 0;
+      border-radius: 9px;
+      padding: 10px 16px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .print-btn {
+      background: #15945d;
+      color: white;
+    }
+
+    .close-footer {
+      background: #eef2f0;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 900px) {
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .filter-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .filter-grid .search-field {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .topbar {
+        padding: 0 15px;
+      }
+
+      .topbar-title span {
+        display: none;
+      }
+
+      .container {
+        padding: 18px 12px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .stat {
+        padding: 15px;
+      }
+
+      .stat-value {
+        font-size: 20px;
+      }
+
+      .filter-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-grid .search-field {
+        grid-column: auto;
+      }
+
+      .detail-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .login-box {
+        padding: 25px 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       LOGIN SCREEN
+  ========================= -->
+
+  <section id="loginScreen">
+
+    <div class="login-box">
+
+      <div class="brand">
+        <div class="brand-logo">G</div>
+        <h1>GROVA HOLDINGS</h1>
+        <p>Hệ thống quản lý báo giá</p>
+      </div>
+
+      <form id="loginForm">
+
+        <div class="field">
+          <label for="email">Email quản trị</label>
+          <input
+            id="email"
+            type="email"
+            autocomplete="username"
+            placeholder="Email"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label for="password">Mật khẩu</label>
+          <input
+            id="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="Mật khẩu"
+            required
+          >
+        </div>
+
+        <button
+          id="loginBtn"
+          class="primary-btn"
+          type="submit"
+        >
+          Đăng nhập
+        </button>
+
+        <div
+          id="loginMessage"
+          class="message hidden"
+        ></div>
+
+      </form>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       ADMIN SCREEN
+  ========================= -->
+
+  <section
+    id="adminScreen"
+    class="hidden"
+  >
+
+    <header class="topbar">
+
+      <div class="topbar-left">
+
+        <div class="mini-logo">
+          G
+        </div>
+
+        <div class="topbar-title">
+          <strong>GROVA HOLDINGS</strong>
+          <span>Quản trị hệ thống báo giá</span>
+        </div>
+
+      </div>
+
+      <button
+        id="logoutBtn"
+        class="logout-btn"
+      >
+        Đăng xuất
+      </button>
+
+    </header>
+
+
+    <main class="container">
+
+      <div class="page-title">
+        <h2>Quản lý báo giá</h2>
+        <p>Theo dõi và quản lý toàn bộ báo giá đã tạo.</p>
+      </div>
+
+
+      <!-- STATISTICS -->
+
+      <section class="stats">
+
+        <div class="stat">
+          <div class="stat-label">
+            Tổng báo giá
+          </div>
+
+          <div
+            id="statQuotes"
+            class="stat-value"
+          >
+            0
+          </div>
+        </div>
+
+
+        <div class="stat">
+          <div class="stat-label">
+            Tổng giá trị
+          </div>
+
+          <div
+            id="statRevenue"
+            class="stat-value"
+          >
+            0 ₫
+          </div>
+        </div>
+
+
+        <div class="stat">
+          <div class="stat-label">
+            Hôm nay
+          </div>
+
+          <div
+            id="statToday"
+            class="stat-value"
+          >
+            0
+          </div>
+        </div>
+
+
+        <div class="stat">
+          <div class="stat-label">
+            Giá trị trung bình
+          </div>
+
+          <div
+            id="statAverage"
+            class="stat-value"
+          >
+            0 ₫
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- FILTER -->
+
+      <section class="filter-box">
+
+        <div class="filter-grid">
+
+          <div class="filter-item search-field">
+            <label>
+              Tìm kiếm
+            </label>
+
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="Tên, SĐT, mã báo giá hoặc địa chỉ..."
+            >
+          </div>
+
+
+          <div class="filter-item">
+
+            <label>
+              Từ ngày
+            </label>
+
+            <input
+              id="fromDate"
+              type="date"
+            >
+
+          </div>
+
+
+          <div class="filter-item">
+
+            <label>
+              Đến ngày
+            </label>
+
+            <input
+              id="toDate"
+              type="date"
+            >
+
+          </div>
+
+
+          <button
+            id="clearFilterBtn"
+            class="filter-btn"
+            type="button"
+          >
+            Xóa lọc
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- TABLE -->
+
+      <section class="table-box">
+
+        <div class="table-head">
+
+          <strong>
+            Danh sách báo giá
+          </strong>
+
+          <span
+            id="tableCount"
+            class="table-count"
+          >
+            0 báo giá
+          </span>
+
+        </div>
+
+
+        <div class="table-scroll">
+
+          <table>
+
+            <thead>
+
+              <tr>
+
+                <th>
+                  Mã báo giá
+                </th>
+
+                <th>
+                  Ngày
+                </th>
+
+                <th>
+                  Khách hàng
+                </th>
+
+                <th>
+                  Số điện thoại
+                </th>
+
+                <th>
+                  Địa chỉ
+                </th>
+
+                <th>
+                  Loại thang
+                </th>
+
+                <th>
+                  Tải trọng
+                </th>
+
+                <th>
+                  Tổng tiền
+                </th>
+
+                <th>
+                  Thao tác
+                </th>
+
+              </tr>
+
+            </thead>
+
+            <tbody id="quotesBody">
+
+              <tr>
+                <td
+                  colspan="9"
+                  class="loading"
+                >
+                  Đang tải dữ liệu...
+                </td>
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </section>
+
+    </main>
+
+  </section>
+
+
+  <!-- =========================
+       DETAIL MODAL
+  ========================= -->
+
+  <div
+    id="detailModal"
+    class="modal-overlay hidden"
+  >
+
+    <div class="modal">
+
+      <div class="modal-header">
+
+        <h3>
+          Chi tiết báo giá
+        </h3>
+
+        <button
+          id="closeModalBtn"
+          class="close-btn"
+          type="button"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div
+        id="detailBody"
+        class="modal-body"
+      >
+      </div>
+
+
+      <div class="modal-footer">
+
+        <button
+          id="closeFooterBtn"
+          class="close-footer"
+          type="button"
+        >
+          Đóng
+        </button>
+
+        <button
+          id="printDetailBtn"
+          class="print-btn"
+          type="button"
+        >
+          In báo giá
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+<script>
+/* =========================================================
+   GROVA HOLDINGS — ADMIN
+========================================================= */
+
+
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+  "https://covlqzbyabfcwjvxrmgj.supabase.co";
+
+
+/*
+  QUAN TRỌNG:
+
+  Dán PUBLISHABLE KEY của Supabase vào dòng dưới.
+
+  KHÔNG dùng Secret Key.
+*/
+
+const SUPABASE_KEY =
+  "sb_publishable_bl1a_uzU2qzHDchJ7d3x_Q_XFrfeABG";
+
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+/* =========================================================
+   STATE
+========================================================= */
+
+let allQuotes = [];
+let filteredQuotes = [];
+let selectedQuote = null;
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const loginScreen =
+  document.getElementById("loginScreen");
+
+const adminScreen =
+  document.getElementById("adminScreen");
+
+const loginForm =
+  document.getElementById("loginForm");
+
+const loginBtn =
+  document.getElementById("loginBtn");
+
+const loginMessage =
+  document.getElementById("loginMessage");
+
+const logoutBtn =
+  document.getElementById("logoutBtn");
+
+const searchInput =
+  document.getElementById("searchInput");
+
+const fromDate =
+  document.getElementById("fromDate");
+
+const toDate =
+  document.getElementById("toDate");
+
+const clearFilterBtn =
+  document.getElementById("clearFilterBtn");
+
+const quotesBody =
+  document.getElementById("quotesBody");
+
+const tableCount =
+  document.getElementById("tableCount");
+
+const detailModal =
+  document.getElementById("detailModal");
+
+const detailBody =
+  document.getElementById("detailBody");
+
+const closeModalBtn =
+  document.getElementById("closeModalBtn");
+
+const closeFooterBtn =
+  document.getElementById("closeFooterBtn");
+
+const printDetailBtn =
+  document.getElementById("printDetailBtn");
+
+
+/* =========================================================
+   FORMAT
+========================================================= */
+
+function money(value) {
+
+  return new Intl.NumberFormat(
+    "vi-VN"
+  ).format(Number(value || 0)) + " ₫";
+
+}
+
+
+function formatDate(value) {
+
+  if (!value) return "";
+
+  const d = new Date(value);
+
+  return d.toLocaleDateString(
+    "vi-VN",
+    {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric"
+    }
+  );
+
+}
+
+
+function formatDateTime(value) {
+
+  if (!value) return "";
+
+  const d = new Date(value);
+
+  return d.toLocaleString(
+    "vi-VN",
+    {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit"
+    }
+  );
+
+}
+
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+/* =========================================================
+   LOGIN MESSAGE
+========================================================= */
+
+function showLoginMessage(
+  text,
+  type = "error"
+) {
+
+  loginMessage.textContent = text;
+
+  loginMessage.className =
+    "message " + type;
+
+}
+
+
+function hideLoginMessage() {
+
+  loginMessage.className =
+    "message hidden";
+
+}
+
+
+/* =========================================================
+   LOGIN
+========================================================= */
+
+loginForm.addEventListener(
+  "submit",
+  async function(event) {
+
+    event.preventDefault();
+
+    hideLoginMessage();
+
+    const email =
+      document
+        .getElementById("email")
+        .value
+        .trim();
+
+    const password =
+      document
+        .getElementById("password")
+        .value;
+
+    if (!email || !password) {
+
+      showLoginMessage(
+        "Vui lòng nhập đầy đủ email và mật khẩu."
+      );
+
+      return;
+    }
+
+
+    loginBtn.disabled = true;
+
+    loginBtn.textContent =
+      "Đang đăng nhập...";
+
+
+    try {
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient.auth
+          .signInWithPassword({
+            email,
+            password
+          });
+
+
+      if (error) {
+        throw error;
+      }
+
+
+      if (!data || !data.user) {
+
+        throw new Error(
+          "Không nhận được thông tin tài khoản."
+        );
+
+      }
+
+
+      /*
+        Kiểm tra quyền ADMIN
+      */
+
+      const role =
+        data.user.app_metadata?.role;
+
+
+      if (role !== "admin") {
+
+        await supabaseClient.auth.signOut();
+
+        throw new Error(
+          "Tài khoản này chưa được cấp quyền Admin."
+        );
+
+      }
+
+
+      await showAdmin();
+
+
+    } catch (error) {
+
+      console.error(
+        "Login error:",
+        error
+      );
+
+      showLoginMessage(
+        getAuthErrorMessage(error)
+      );
+
+    } finally {
+
+      loginBtn.disabled = false;
+
+      loginBtn.textContent =
+        "Đăng nhập";
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   AUTH ERROR
+========================================================= */
+
+function getAuthErrorMessage(error) {
+
+  const message =
+    error?.message || "";
+
+  if (
+    message
+      .toLowerCase()
+      .includes("invalid login credentials")
+  ) {
+
+    return "Email hoặc mật khẩu không đúng.";
+
+  }
+
+  if (
+    message
+      .toLowerCase()
+      .includes("email not confirmed")
+  ) {
+
+    return "Email chưa được xác nhận.";
+
+  }
+
+  if (
+    message
+      .toLowerCase()
+      .includes("admin")
+  ) {
+
+    return message;
+
+  }
+
+  return message ||
+    "Đăng nhập không thành công.";
+
+}
+
+
+/* =========================================================
+   SHOW ADMIN
+========================================================= */
+
+async function showAdmin() {
+
+  loginScreen.classList.add("hidden");
+
+  adminScreen.classList.remove("hidden");
+
+  await loadQuotes();
+
+}
+
+
+/* =========================================================
+   CHECK EXISTING SESSION
+========================================================= */
+
+async function checkSession() {
+
+  try {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth
+        .getSession();
+
+
+    if (error) {
+      console.error(error);
+      return;
+    }
+
+
+    const session =
+      data?.session;
+
+
+    if (!session) {
+      return;
+    }
+
+
+    const user =
+      session.user;
+
+
+    const role =
+      user.app_metadata?.role;
+
+
+    if (role === "admin") {
+
+      await showAdmin();
+
+    }
+
+  } catch (error) {
+
+    console.error(
+      "Session error:",
+      error
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   LOAD QUOTES
+========================================================= */
+
+async function loadQuotes() {
+
+  quotesBody.innerHTML = `
+    <tr>
+      <td colspan="9" class="loading">
+        Đang tải dữ liệu báo giá...
+      </td>
+    </tr>
+  `;
+
+
+  try {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("quotes")
+        .select("*")
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
+
+
+    if (error) {
+      throw error;
+    }
+
+
+    allQuotes =
+      Array.isArray(data)
+        ? data
+        : [];
+
+
+    filteredQuotes =
+      [...allQuotes];
+
+
+    updateStatistics();
+
+    renderQuotes();
+
+
+  } catch (error) {
+
+    console.error(
+      "Load quotes error:",
+      error
+    );
+
+
+    quotesBody.innerHTML = `
+      <tr>
+        <td colspan="9" class="empty">
+          Không thể tải dữ liệu báo giá.<br><br>
+          <small>${escapeHtml(error.message)}</small>
+        </td>
+      </tr>
+    `;
+
+  }
+
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function applyFilters() {
+
+  const keyword =
+    searchInput.value
+      .trim()
+      .toLowerCase();
+
+  const from =
+    fromDate.value;
+
+  const to =
+    toDate.value;
+
+
+  filteredQuotes =
+    allQuotes.filter(
+      quote => {
+
+        const searchText =
+          [
+            quote.quote_number,
+            quote.customer_name,
+            quote.customer_phone,
+            quote.project_address,
+            quote.elevator_type,
+            quote.cabin,
+            quote.door,
+            quote.machine
+          ]
+          .join(" ")
+          .toLowerCase();
+
+
+        const matchKeyword =
+          !keyword ||
+          searchText.includes(keyword);
+
+
+        const quoteDate =
+          quote.created_at
+            ? new Date(quote.created_at)
+            : null;
+
+
+        let matchFrom = true;
+        let matchTo = true;
+
+
+        if (from && quoteDate) {
+
+          const fromDateObj =
+            new Date(
+              from + "T00:00:00"
+            );
+
+          matchFrom =
+            quoteDate >= fromDateObj;
+
+        }
+
+
+        if (to && quoteDate) {
+
+          const toDateObj =
+            new Date(
+              to + "T23:59:59"
+            );
+
+          matchTo =
+            quoteDate <= toDateObj;
+
+        }
+
+
+        return (
+          matchKeyword &&
+          matchFrom &&
+          matchTo
+        );
+
+      }
+    );
+
+
+  renderQuotes();
+
+}
+
+
+/* =========================================================
+   SEARCH EVENTS
+========================================================= */
+
+searchInput.addEventListener(
+  "input",
+  applyFilters
+);
+
+fromDate.addEventListener(
+  "change",
+  applyFilters
+);
+
+toDate.addEventListener(
+  "change",
+  applyFilters
+);
+
+
+clearFilterBtn.addEventListener(
+  "click",
+  function() {
+
+    searchInput.value = "";
+    fromDate.value = "";
+    toDate.value = "";
+
+    applyFilters();
+
+  }
+);
+
+
+/* =========================================================
+   RENDER TABLE
+========================================================= */
+
+function renderQuotes() {
+
+  tableCount.textContent =
+    `${filteredQuotes.length} báo giá`;
+
+
+  if (!filteredQuotes.length) {
+
+    quotesBody.innerHTML = `
+      <tr>
+        <td colspan="9" class="empty">
+          Không tìm thấy báo giá.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+
+  quotesBody.innerHTML =
+    filteredQuotes
+      .map(
+        (quote, index) => `
+
+          <tr>
+
+            <td>
+              <span class="quote-number">
+                ${escapeHtml(
+                  quote.quote_number
+                )}
+              </span>
+            </td>
+
+
+            <td>
+              ${formatDate(
+                quote.created_at
+              )}
+            </td>
+
+
+            <td>
+              <span class="customer-name">
+                ${escapeHtml(
+                  quote.customer_name
+                )}
+              </span>
+            </td>
+
+
+            <td>
+              <span class="phone">
+                ${escapeHtml(
+                  quote.customer_phone
+                )}
+              </span>
+            </td>
+
+
+            <td>
+              ${escapeHtml(
+                quote.project_address
+              )}
+            </td>
+
+
+            <td>
+              ${escapeHtml(
+                quote.elevator_type
+              )}
+            </td>
+
+
+            <td>
+              ${escapeHtml(
+                quote.capacity
+              )} kg
+            </td>
+
+
+            <td>
+              <span class="price">
+                ${money(
+                  quote.total_price
+                )}
+              </span>
+            </td>
+
+
+            <td>
+
+              <button
+                class="detail-btn"
+                type="button"
+                data-index="${index}"
+              >
+                Xem
+              </button>
+
+            </td>
+
+          </tr>
+
+        `
+      )
+      .join("");
+
+
+  document
+    .querySelectorAll(".detail-btn")
+    .forEach(
+      button => {
+
+        button.addEventListener(
+          "click",
+          function() {
+
+            const index =
+              Number(
+                this.dataset.index
+              );
+
+            openQuote(
+              filteredQuotes[index]
+            );
+
+          }
+        );
+
+      }
+    );
+
+}
+
+
+/* =========================================================
+   STATISTICS
+========================================================= */
+
+function updateStatistics() {
+
+  const total =
+    allQuotes.length;
+
+
+  const revenue =
+    allQuotes.reduce(
+      (
+        sum,
+        quote
+      ) =>
+        sum +
+        Number(
+          quote.total_price || 0
+        ),
+      0
+    );
+
+
+  const todayString =
+    new Date()
+      .toISOString()
+      .slice(0, 10);
+
+
+  const today =
+    allQuotes.filter(
+      quote =>
+        quote.created_at &&
+        new Date(
+          quote.created_at
+        )
+        .toISOString()
+        .slice(0, 10)
+        === todayString
+    ).length;
+
+
+  const average =
+    total
+      ? revenue / total
+      : 0;
+
+
+  document.getElementById(
+    "statQuotes"
+  ).textContent =
+    total;
+
+
+  document.getElementById(
+    "statRevenue"
+  ).textContent =
+    money(revenue);
+
+
+  document.getElementById(
+    "statToday"
+  ).textContent =
+    today;
+
+
+  document.getElementById(
+    "statAverage"
+  ).textContent =
+    money(average);
+
+}
+
+
+/* =========================================================
+   DETAIL
+========================================================= */
+
+function openQuote(quote) {
+
+  selectedQuote =
+    quote;
+
+
+  detailBody.innerHTML = `
+
+    <div class="detail-section">
+
+      <h4>
+        Thông tin báo giá
+      </h4>
+
+      <div class="detail-grid">
+
+        <div class="detail-item">
+          <small>Mã báo giá</small>
+          <strong>
+            ${escapeHtml(
+              quote.quote_number
+            )}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <small>Ngày tạo</small>
+          <strong>
+            ${formatDateTime(
+              quote.created_at
+            )}
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-section">
+
+      <h4>
+        Khách hàng
+      </h4>
+
+      <div class="detail-grid">
+
+        <div class="detail-item">
+          <small>Họ tên</small>
+          <strong>
+            ${escapeHtml(
+              quote.customer_name
+            )}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <small>Số điện thoại</small>
+          <strong>
+            ${escapeHtml(
+              quote.customer_phone
+            )}
+          </strong>
+        </div>
+
+        <div
+          class="detail-item"
+          style="grid-column:1/-1"
+        >
+          <small>Địa chỉ công trình</small>
+          <strong>
+            ${escapeHtml(
+              quote.project_address
+            )}
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-section">
+
+      <h4>
+        Cấu hình thang máy
+      </h4>
+
+      <div class="detail-grid">
+
+        <div class="detail-item">
+          <small>Loại thang</small>
+          <strong>
+            ${escapeHtml(
+              quote.elevator_type
+            )}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <small>Tải trọng</small>
+          <strong>
+            ${escapeHtml(
+              quote.capacity
+            )} kg
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <small>Số Stop</small>
+          <strong>
+            ${escapeHtml(
+              quote.stop
+            )}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <small>Số cửa</small>
+          <strong>
+            ${escapeHtml(
+              quote.door_count
+            )}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <small>Cabin</small>
+          <strong>
+            ${escapeHtml(
+              quote.cabin
+            )}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <small>Cửa</small>
+          <strong>
+            ${escapeHtml(
+              quote.door
+            )}
+          </strong>
+        </div>
+
+        <div class="detail-item">
+          <small>Máy kéo</small>
+          <strong>
+            ${escapeHtml(
+              quote.machine
+            )}
+          </strong>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="detail-section">
+
+      <h4>
+        Giá trị báo giá
+      </h4>
+
+      <div class="detail-item">
+
+        <small>
+          Tổng giá
+        </small>
+
+        <strong
+          style="
+            font-size:24px;
+            color:#138553;
+          "
+        >
+          ${money(
+            quote.total_price
+          )}
+        </strong>
+
+      </div>
+
+    </div>
+
+  `;
+
+
+  detailModal.classList.remove(
+    "hidden"
+  );
+
+}
+
+
+/* =========================================================
+   CLOSE MODAL
+========================================================= */
+
+function closeModal() {
+
+  detailModal.classList.add(
+    "hidden"
+  );
+
+  selectedQuote = null;
+
+}
+
+
+closeModalBtn.addEventListener(
+  "click",
+  closeModal
+);
+
+
+closeFooterBtn.addEventListener(
+  "click",
+  closeModal
+);
+
+
+detailModal.addEventListener(
+  "click",
+  function(event) {
+
+    if (
+      event.target ===
+      detailModal
+    ) {
+
+      closeModal();
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+printDetailBtn.addEventListener(
+  "click",
+  function() {
+
+    if (!selectedQuote) {
+      return;
+    }
+
+
+    /*
+      Hiện tại dùng dữ liệu chi tiết
+      để in nhanh.
+
+      Phần tiếp theo chúng ta sẽ
+      nối trực tiếp với mẫu báo giá
+      hiện tại của GROVA.
+    */
+
+    const q =
+      selectedQuote;
+
+
+    const printWindow =
+      window.open(
+        "",
+        "_blank"
+      );
+
+
+    if (!printWindow) {
+
+      alert(
+        "Trình duyệt đã chặn cửa sổ in. Hãy cho phép popup."
+      );
+
+      return;
+
+    }
+
+
+    printWindow.document.write(`
+
+      <!DOCTYPE html>
+
+      <html lang="vi">
+
+      <head>
+
+        <meta charset="UTF-8">
+
+        <title>
+          ${escapeHtml(
+            q.quote_number
+          )}
+        </title>
+
+        <style>
+
+          body {
+            font-family: Arial, sans-serif;
+            padding: 35px;
+            color: #111;
+          }
+
+          h1 {
+            margin-bottom: 5px;
+          }
+
+          .sub {
+            color: #666;
+            margin-bottom: 30px;
+          }
+
+          table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+          }
+
+          td {
+            border: 1px solid #ccc;
+            padding: 10px;
+          }
+
+          td:first-child {
+            width: 35%;
+            font-weight: bold;
+            background: #f5f5f5;
+          }
+
+          .total {
+            font-size: 22px;
+            font-weight: bold;
+          }
+
+        </style>
+
+      </head>
+
+      <body>
+
+        <h1>
+          GROVA HOLDINGS
+        </h1>
+
+        <div class="sub">
+          BÁO GIÁ THANG MÁY
+        </div>
+
+        <table>
+
+          <tr>
+            <td>Mã báo giá</td>
+            <td>
+              ${escapeHtml(q.quote_number)}
+            </td>
+          </tr>
+
+          <tr>
+            <td>Ngày tạo</td>
+            <td>
+              ${formatDateTime(q.created_at)}
+            </td>
+          </tr>
+
+          <tr>
+            <td>Khách hàng</td>
+            <td>
+              ${escapeHtml(q.customer_name)}
+            </td>
+          </tr>
+
+          <tr>
+            <td>Số điện thoại</td>
+            <td>
+              ${escapeHtml(q.customer_phone)}
+            </td>
+          </tr>
+
+          <tr>
+            <td>Địa chỉ</td>
+            <td>
+              ${escapeHtml(q.project_address)}
+            </td>
+          </tr>
+
+          <tr>
+            <td>Loại thang</td>
+            <td>
+              ${escapeHtml(q.elevator_type)}
+            </td>
+          </tr>
+
+          <tr>
+            <td>Tải trọng</td>
+            <td>
+              ${escapeHtml(q.capacity)} kg
+            </td>
+          </tr>
+
+          <tr>
+            <td>Stop</td>
+            <td>
+              ${escapeHtml(q.stop)}
+            </td>
+          </tr>
+
+          <tr>
+            <td>Số cửa</td>
+            <td>
+              ${escapeHtml(q.door_count)}
+            </td>
+          </tr>
+
+          <tr>
+            <td>Cabin</td>
+            <td>
+              ${escapeHtml(q.cabin)}
+            </td>
+          </tr>
+
+          <tr>
+            <td>Cửa</td>
+            <td>
+              ${escapeHtml(q.door)}
+            </td>
+          </tr>
+
+          <tr>
+            <td>Máy kéo</td>
+            <td>
+              ${escapeHtml(q.machine)}
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>TỔNG GIÁ</strong>
+            </td>
+            <td class="total">
+              ${money(q.total_price)}
+            </td>
+          </tr>
+
+        </table>
+
+        <script>
+
+          window.onload = function() {
+            window.print();
+          };
+
+        <\/script>
+
+      </body>
+
+      </html>
+
+    `);
+
+
+    printWindow.document.close();
+
+  }
+);
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+logoutBtn.addEventListener(
+  "click",
+  async function() {
+
+    await supabaseClient.auth.signOut();
+
+    allQuotes = [];
+    filteredQuotes = [];
+
+    adminScreen.classList.add(
+      "hidden"
+    );
+
+    loginScreen.classList.remove(
+      "hidden"
+    );
+
+    document.getElementById(
+      "password"
+    ).value = "";
+
+  }
+);
+
+
+/* =========================================================
+   AUTH STATE
+========================================================= */
+
+supabaseClient.auth.onAuthStateChange(
+  function(event, session) {
+
+    if (!session) {
+
+      adminScreen.classList.add(
+        "hidden"
+      );
+
+      loginScreen.classList.remove(
+        "hidden"
+      );
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   START
+========================================================= */
+
+checkSession();
+
+</script>
+
+</body>
+</html>
