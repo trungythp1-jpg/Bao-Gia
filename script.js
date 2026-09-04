@@ -3,7 +3,6 @@
 // BÁO GIÁ THANG MÁY
 // =====================================================
 
-
 "use strict";
 
 
@@ -12,18 +11,14 @@
 // =====================================================
 
 function $(id) {
-
   return document.getElementById(id);
-
 }
 
 
 function money(value) {
-
   return new Intl.NumberFormat(
     "vi-VN"
   ).format(value) + " đ";
-
 }
 
 
@@ -83,7 +78,6 @@ const QUOTE_NUMBER =
 
 function calculateQuote() {
 
-
   const type =
     $("elevatorType").value;
 
@@ -112,7 +106,6 @@ function calculateQuote() {
     $("machine").value;
 
 
-
   // -----------------------------------------------
   // SỐ CỬA
   // -----------------------------------------------
@@ -121,14 +114,12 @@ function calculateQuote() {
     stop + 1;
 
 
-
   // -----------------------------------------------
   // TẢI TRỌNG
   // -----------------------------------------------
 
   const capacityPrice =
     PRICE_CONFIG.capacity[capacity] || 0;
-
 
 
   // -----------------------------------------------
@@ -141,7 +132,6 @@ function calculateQuote() {
       stop - PRICE_CONFIG.stop.base
     ) *
     PRICE_CONFIG.stop.additional;
-
 
 
   // -----------------------------------------------
@@ -164,7 +154,6 @@ function calculateQuote() {
   }
 
 
-
   // -----------------------------------------------
   // CABIN
   // -----------------------------------------------
@@ -173,7 +162,6 @@ function calculateQuote() {
     PRICE_CONFIG
       .cabin[cabin]
       .price;
-
 
 
   // -----------------------------------------------
@@ -191,7 +179,6 @@ function calculateQuote() {
     doorUnitPrice;
 
 
-
   // -----------------------------------------------
   // MÁY
   // -----------------------------------------------
@@ -200,7 +187,6 @@ function calculateQuote() {
     PRICE_CONFIG
       .machine[machine]
       .price;
-
 
 
   // -----------------------------------------------
@@ -222,7 +208,6 @@ function calculateQuote() {
     doorPrice +
 
     machinePrice;
-
 
 
   return {
@@ -263,40 +248,17 @@ function calculateQuote() {
 
 
 // =====================================================
-// HIỂN THỊ WEBSITE
+// TẠO DANH SÁCH HẠNG MỤC GIÁ
 // =====================================================
 
-function updateWebsite() {
-
-
-  const quote =
-    calculateQuote();
-
-
-
-  // -----------------------------------------------
-  // TÓM TẮT
-  // -----------------------------------------------
-
-  $("typeDisplay").textContent =
-    ELEVATOR_TYPES[quote.type];
-
-
-  $("stopDisplay").textContent =
-    `${quote.stop} Stop`;
-
-
-  $("doorCount").textContent =
-    `${quote.doorCount} cửa`;
-
-
-
-  // -----------------------------------------------
-  // CHI TIẾT GIÁ
-  // -----------------------------------------------
+function buildPriceRows(quote) {
 
   const rows = [];
 
+
+  // -----------------------------------------------
+  // GIÁ THANG CƠ BẢN
+  // -----------------------------------------------
 
   rows.push({
 
@@ -308,6 +270,9 @@ function updateWebsite() {
   });
 
 
+  // -----------------------------------------------
+  // TẢI TRỌNG
+  // -----------------------------------------------
 
   if (quote.capacityPrice > 0) {
 
@@ -324,6 +289,9 @@ function updateWebsite() {
   }
 
 
+  // -----------------------------------------------
+  // STOP
+  // -----------------------------------------------
 
   if (quote.stopPrice > 0) {
 
@@ -340,6 +308,9 @@ function updateWebsite() {
   }
 
 
+  // -----------------------------------------------
+  // KHUNG THÉP
+  // -----------------------------------------------
 
   if (quote.type === "khung-thep") {
 
@@ -356,6 +327,9 @@ function updateWebsite() {
   }
 
 
+  // -----------------------------------------------
+  // CABIN
+  // -----------------------------------------------
 
   if (quote.cabinPrice > 0) {
 
@@ -374,13 +348,16 @@ function updateWebsite() {
   }
 
 
+  // -----------------------------------------------
+  // CỬA TẦNG
+  // -----------------------------------------------
 
   if (quote.doorPrice > 0) {
 
     rows.push({
 
       name:
-        `${PRICE_CONFIG.door[quote.door].name} – ${quote.doorCount} cửa`,
+        `${PRICE_CONFIG.door[quote.door].name} – ${quote.doorCount} cửa × ${money(quote.doorUnitPrice)}`,
 
       price:
         quote.doorPrice
@@ -390,6 +367,9 @@ function updateWebsite() {
   }
 
 
+  // -----------------------------------------------
+  // MÁY KÉO
+  // -----------------------------------------------
 
   if (quote.machinePrice > 0) {
 
@@ -407,6 +387,44 @@ function updateWebsite() {
 
   }
 
+
+  return rows;
+
+}
+
+
+// =====================================================
+// HIỂN THỊ WEBSITE
+// =====================================================
+
+function updateWebsite() {
+
+  const quote =
+    calculateQuote();
+
+
+  // -----------------------------------------------
+  // TÓM TẮT
+  // -----------------------------------------------
+
+  $("typeDisplay").textContent =
+    ELEVATOR_TYPES[quote.type];
+
+
+  $("stopDisplay").textContent =
+    `${quote.stop} Stop`;
+
+
+  $("doorCount").textContent =
+    `${quote.doorCount} cửa`;
+
+
+  // -----------------------------------------------
+  // CHI TIẾT GIÁ WEBSITE
+  // -----------------------------------------------
+
+  const rows =
+    buildPriceRows(quote);
 
 
   $("quoteDetails").innerHTML =
@@ -436,7 +454,6 @@ function updateWebsite() {
     }).join("");
 
 
-
   // -----------------------------------------------
   // TỔNG
   // -----------------------------------------------
@@ -445,9 +462,8 @@ function updateWebsite() {
     money(quote.total);
 
 
-
   // -----------------------------------------------
-  // CẬP NHẬT PDF
+  // PDF
   // -----------------------------------------------
 
   updatePrintQuote(quote);
@@ -460,7 +476,6 @@ function updateWebsite() {
 // =====================================================
 
 function updatePrintQuote(quote) {
-
 
   const now =
     new Date();
@@ -482,6 +497,9 @@ function updatePrintQuote(quote) {
     now.getFullYear();
 
 
+  // -----------------------------------------------
+  // THÔNG TIN BÁO GIÁ
+  // -----------------------------------------------
 
   $("printQuoteNo").textContent =
     QUOTE_NUMBER;
@@ -491,6 +509,9 @@ function updatePrintQuote(quote) {
     `${day}/${month}/${year}`;
 
 
+  // -----------------------------------------------
+  // KHÁCH HÀNG
+  // -----------------------------------------------
 
   $("printCustomer").textContent =
     $("customerName").value.trim()
@@ -507,6 +528,9 @@ function updatePrintQuote(quote) {
       || "—";
 
 
+  // -----------------------------------------------
+  // CẤU HÌNH
+  // -----------------------------------------------
 
   $("printType").textContent =
     ELEVATOR_TYPES[quote.type];
@@ -542,132 +566,25 @@ function updatePrintQuote(quote) {
       .name;
 
 
-
   // -----------------------------------------------
   // BẢNG GIÁ PDF
   // -----------------------------------------------
 
-  const rows = [];
-
-
-  rows.push({
-
-    name: "Giá thang cơ bản",
-
-    price:
-      PRICE_CONFIG.basePrice
-
-  });
-
-
-
-  if (quote.capacityPrice > 0) {
-
-    rows.push({
-
-      name:
-        `Tăng tải trọng – ${quote.capacity} kg`,
-
-      price:
-        quote.capacityPrice
-
-    });
-
-  }
-
-
-
-  if (quote.stopPrice > 0) {
-
-    rows.push({
-
-      name:
-        `Tăng số Stop – ${quote.stop} Stop`,
-
-      price:
-        quote.stopPrice
-
-    });
-
-  }
-
-
-
-  if (quote.type === "khung-thep") {
-
-    rows.push({
-
-      name:
-        `Khung thép – ${quote.stop} Stop`,
-
-      price:
-        quote.steelFramePrice
-
-    });
-
-  }
-
-
-
-  if (quote.cabinPrice > 0) {
-
-    rows.push({
-
-      name:
-        PRICE_CONFIG
-          .cabin[quote.cabin]
-          .name,
-
-      price:
-        quote.cabinPrice
-
-    });
-
-  }
-
-
-
-  if (quote.doorPrice > 0) {
-
-    rows.push({
-
-      name:
-        `${PRICE_CONFIG.door[quote.door].name} – ${quote.doorCount} cửa × ${money(quote.doorUnitPrice)}`,
-
-      price:
-        quote.doorPrice
-
-    });
-
-  }
-
-
-
-  if (quote.machinePrice > 0) {
-
-    rows.push({
-
-      name:
-        PRICE_CONFIG
-          .machine[quote.machine]
-          .name,
-
-      price:
-        quote.machinePrice
-
-    });
-
-  }
-
+  const rows =
+    buildPriceRows(quote);
 
 
   $("printPriceRows").innerHTML =
 
-    rows.map(function(row) {
+    rows.map(function(row, index) {
 
       return `
 
         <tr>
+
+          <td>
+            ${index + 1}
+          </td>
 
           <td>
             ${row.name}
@@ -688,6 +605,9 @@ function updatePrintQuote(quote) {
     }).join("");
 
 
+  // -----------------------------------------------
+  // TỔNG GIÁ
+  // -----------------------------------------------
 
   $("printTotal").textContent =
     money(quote.total);
@@ -700,7 +620,6 @@ function updatePrintQuote(quote) {
 // =====================================================
 
 function resetForm() {
-
 
   $("customerName").value =
     "";
@@ -749,7 +668,6 @@ function resetForm() {
 
 function createPDF() {
 
-
   // Tính lại lần cuối
   updateWebsite();
 
@@ -769,7 +687,6 @@ function createPDF() {
 // =====================================================
 
 function init() {
-
 
   const fields = [
 
@@ -792,7 +709,6 @@ function init() {
     "machine"
 
   ];
-
 
 
   fields.forEach(function(id) {
@@ -818,6 +734,9 @@ function init() {
   });
 
 
+  // -----------------------------------------------
+  // NÚT ĐẶT LẠI
+  // -----------------------------------------------
 
   $("resetBtn")
     .addEventListener(
@@ -826,6 +745,10 @@ function init() {
     );
 
 
+  // -----------------------------------------------
+  // NÚT TẠO PDF
+  // -----------------------------------------------
+
   $("printBtn")
     .addEventListener(
       "click",
@@ -833,6 +756,9 @@ function init() {
     );
 
 
+  // -----------------------------------------------
+  // HIỂN THỊ BAN ĐẦU
+  // -----------------------------------------------
 
   updateWebsite();
 
