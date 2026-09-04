@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>GROVA HOLDINGS - Báo giá thang máy</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="header">
+
+  <div class="brand">
+
+    <div class="logo">
+      G
+    </div>
+
+    <div>
+      <div class="company-name">
+        GROVA HOLDINGS
+      </div>
+
+      <div class="company-title">
+        BÁO GIÁ THANG MÁY
+      </div>
+    </div>
+
+  </div>
+
+</header>
+
+
+<main class="container">
+
+  <!-- TIÊU ĐỀ -->
+
+  <section class="hero">
+
+    <div>
+
+      <div class="eyebrow">
+        GROVA HOLDINGS
+      </div>
+
+      <h1>
+        Báo giá thang máy
+      </h1>
+
+      <p>
+        Cấu hình và tính giá tự động
+      </p>
+
+    </div>
+
+    <div class="validity">
+      Báo giá có hiệu lực
+      <strong>30 ngày</strong>
+    </div>
+
+  </section>
+
+
+  <!-- THÔNG TIN KHÁCH HÀNG -->
+
+  <section class="card">
+
+    <h2>
+      01. Thông tin khách hàng
+    </h2>
+
+    <div class="grid">
+
+      <div class="field">
+
+        <label>
+          Tên khách hàng
+        </label>
+
+        <input
+          id="customerName"
+          type="text"
+          placeholder="Nhập tên khách hàng"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Số điện thoại
+        </label>
+
+        <input
+          id="customerPhone"
+          type="tel"
+          placeholder="Nhập số điện thoại"
+        >
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Địa chỉ công trình
+        </label>
+
+        <input
+          id="projectAddress"
+          type="text"
+          placeholder="Nhập địa chỉ công trình"
+        >
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CẤU HÌNH -->
+
+  <section class="card">
+
+    <h2>
+      02. Cấu hình thang máy
+    </h2>
+
+
+    <div class="grid">
+
+
+      <div class="field">
+
+        <label>
+          Loại thang
+        </label>
+
+        <select id="elevatorType">
+
+          <option value="ho-xay">
+            Thang Hố xây
+          </option>
+
+          <option value="khung-thep">
+            Thang Khung thép
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Tải trọng
+        </label>
+
+        <select id="capacity">
+
+          <option value="350">
+            350 kg
+          </option>
+
+          <option value="450">
+            450 kg
+          </option>
+
+          <option value="630">
+            630 kg
+          </option>
+
+          <option value="750">
+            750 kg
+          </option>
+
+          <option value="1000">
+            1.000 kg
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Số Stop
+        </label>
+
+        <select id="stop">
+
+          <option value="4">4 Stop</option>
+          <option value="5">5 Stop</option>
+          <option value="6">6 Stop</option>
+          <option value="7">7 Stop</option>
+          <option value="8">8 Stop</option>
+          <option value="9">9 Stop</option>
+          <option value="10">10 Stop</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Cabin
+        </label>
+
+        <select id="cabin">
+
+          <option value="inox-trang">
+            Cabin cơ bản – inox trắng
+          </option>
+
+          <option value="kinh-inox-trang">
+            Cabin kính – inox trắng cơ bản
+          </option>
+
+          <option value="inox-mau">
+            Cabin inox màu
+          </option>
+
+          <option value="kinh-inox-mau">
+            Cabin kính inox màu
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Cửa tầng
+        </label>
+
+        <select id="door">
+
+          <option value="inox-trang">
+            Cửa inox trắng
+          </option>
+
+          <option value="kinh-inox-trang">
+            Kính inox trắng
+          </option>
+
+          <option value="inox-mau">
+            Inox màu
+          </option>
+
+          <option value="kinh-inox-mau">
+            Kính inox màu
+          </option>
+
+        </select>
+
+        <small>
+          2 cánh mở tim
+        </small>
+
+      </div>
+
+
+      <div class="field">
+
+        <label>
+          Máy kéo
+        </label>
+
+        <select id="machine">
+
+          <option value="torin">
+            Torin – China
+          </option>
+
+          <option value="italy">
+            Máy Ý
+          </option>
+
+          <option value="germany">
+            Máy Đức
+          </option>
+
+        </select>
+
+      </div>
+
+    </div>
+
+
+    <!-- THÔNG TIN TỰ ĐỘNG -->
+
+    <div class="auto-info">
+
+      <div>
+
+        <span>
+          Số Stop
+        </span>
+
+        <strong id="stopDisplay">
+          4 Stop
+        </strong>
+
+      </div>
+
+
+      <div>
+
+        <span>
+          Số cửa tầng
+        </span>
+
+        <strong id="doorCount">
+          5 cửa
+        </strong>
+
+      </div>
+
+
+      <div>
+
+        <span>
+          Loại thang
+        </span>
+
+        <strong id="typeDisplay">
+          Thang Hố xây
+        </strong>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- CHI TIẾT GIÁ -->
+
+  <section class="card">
+
+    <div class="section-header">
+
+      <h2>
+        03. Chi tiết báo giá
+      </h2>
+
+      <button
+        id="resetBtn"
+        class="btn-reset"
+      >
+        Đặt lại
+      </button>
+
+    </div>
+
+
+    <div
+      id="quoteDetails"
+      class="quote-details"
+    ></div>
+
+
+    <div class="total">
+
+      <span>
+        TỔNG GIÁ BÁO
+      </span>
+
+      <strong id="totalPrice">
+        285.000.000 đ
+      </strong>
+
+    </div>
+
+  </section>
+
+
+  <!-- GHI CHÚ -->
+
+  <section class="card">
+
+    <h2>
+      04. Ghi chú
+    </h2>
+
+    <ul>
+
+      <li>
+        Giá cơ bản áp dụng cho cấu hình
+        350 kg – 4 Stop – cabin inox trắng –
+        máy Torin China – điều khiển Step China.
+      </li>
+
+      <li>
+        Số cửa tầng = Số Stop + 1.
+      </li>
+
+      <li>
+        Chủ đầu tư cung cấp nguồn điện 3 pha
+        và dây nguồn đến phòng máy.
+      </li>
+
+      <li>
+        GROVA thực hiện phần điện vận hành
+        và hệ thống của thang máy.
+      </li>
+
+      <li>
+        Chủ đầu tư xây dựng hố thang.
+      </li>
+
+      <li>
+        Các chi phí khác đã bao gồm trong báo giá.
+      </li>
+
+      <li>
+        Báo giá có hiệu lực 30 ngày.
+      </li>
+
+    </ul>
+
+  </section>
+
+
+  <div class="actions">
+
+    <button
+      id="printBtn"
+      class="btn-print"
+    >
+      In / Lưu báo giá PDF
+    </button>
+
+  </div>
+
+</main>
+
+
+<footer>
+
+  <strong>
+    GROVA HOLDINGS
+  </strong>
+
+  <span>
+    Giải pháp thang máy chuyên nghiệp
+  </span>
+
+</footer>
+
+
+<script src="data/prices.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
