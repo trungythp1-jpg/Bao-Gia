@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="vi">
 
 <head>
@@ -15,7 +14,6 @@
     GROVA HOLDINGS – Báo giá thang máy
   </title>
 
-
   <link
     rel="stylesheet"
     href="style.css"
@@ -26,10 +24,9 @@
 
 <body>
 
-
 <!-- ==================================================
      HEADER
-=================================================== -->
+================================================== -->
 
 <header class="header">
 
@@ -56,10 +53,9 @@
 </header>
 
 
-
 <!-- ==================================================
      HERO
-=================================================== -->
+================================================== -->
 
 <section class="hero">
 
@@ -74,7 +70,6 @@
   <p>
     Hệ thống cấu hình và tính giá tự động
   </p>
-
 
   <div class="valid-box">
 
@@ -91,13 +86,12 @@
 </section>
 
 
-
 <main class="container">
 
 
 <!-- ==================================================
      01 – KHÁCH HÀNG
-=================================================== -->
+================================================== -->
 
 <section class="card">
 
@@ -169,10 +163,9 @@
 </section>
 
 
-
 <!-- ==================================================
      02 – CẤU HÌNH
-=================================================== -->
+================================================== -->
 
 <section class="card">
 
@@ -220,7 +213,6 @@
   </div>
 
 
-
   <!-- TẢI TRỌNG -->
 
   <div class="form-group">
@@ -254,7 +246,6 @@
     </select>
 
   </div>
-
 
 
   <!-- STOP -->
@@ -300,7 +291,6 @@
   </div>
 
 
-
   <!-- CABIN -->
 
   <div class="form-group">
@@ -330,7 +320,6 @@
     </select>
 
   </div>
-
 
 
   <!-- CỬA -->
@@ -368,7 +357,6 @@
   </div>
 
 
-
   <!-- MÁY -->
 
   <div class="form-group">
@@ -394,7 +382,6 @@
     </select>
 
   </div>
-
 
 
   <!-- TÓM TẮT -->
@@ -444,10 +431,9 @@
 </section>
 
 
-
 <!-- ==================================================
      03 – CHI TIẾT GIÁ
-=================================================== -->
+================================================== -->
 
 <section class="card">
 
@@ -497,10 +483,9 @@
 </section>
 
 
-
 <!-- ==================================================
      04 – GHI CHÚ
-=================================================== -->
+================================================== -->
 
 <section class="card">
 
@@ -550,10 +535,9 @@
 </section>
 
 
-
 <!-- ==================================================
      BUTTONS
-=================================================== -->
+================================================== -->
 
 <div class="buttons">
 
@@ -580,16 +564,16 @@
 </main>
 
 
-
 <!-- ==================================================
-     PHẦN BÁO GIÁ DÙNG CHO PDF / PRINT
-=================================================== -->
+     PRINT / PDF AREA
+================================================== -->
 
 <div
   id="printArea"
   class="print-area"
 >
 
+  <!-- HEADER PDF -->
 
   <div class="print-header">
 
@@ -635,33 +619,62 @@
   </div>
 
 
+  <!-- THÔNG TIN KHÁCH HÀNG -->
 
-  <div class="print-customer">
+  <div class="print-customer print-block">
 
     <h2>
       THÔNG TIN KHÁCH HÀNG
     </h2>
 
-    <p>
-      <strong>Khách hàng:</strong>
-      <span id="printCustomer">—</span>
-    </p>
+    <div class="customer-grid">
 
-    <p>
-      <strong>Số điện thoại:</strong>
-      <span id="printPhone">—</span>
-    </p>
+      <div>
 
-    <p>
-      <strong>Địa chỉ công trình:</strong>
-      <span id="printAddress">—</span>
-    </p>
+        <span>
+          Khách hàng
+        </span>
+
+        <strong id="printCustomer">
+          —
+        </strong>
+
+      </div>
+
+
+      <div>
+
+        <span>
+          Số điện thoại
+        </span>
+
+        <strong id="printPhone">
+          —
+        </strong>
+
+      </div>
+
+
+      <div class="full">
+
+        <span>
+          Địa chỉ công trình
+        </span>
+
+        <strong id="printAddress">
+          —
+        </strong>
+
+      </div>
+
+    </div>
 
   </div>
 
 
+  <!-- CẤU HÌNH -->
 
-  <div class="print-config">
+  <div class="print-config print-block">
 
     <h2>
       CẤU HÌNH THANG MÁY
@@ -669,48 +682,82 @@
 
     <table>
 
-      <tr>
-        <td>Loại thang</td>
-        <td id="printType"></td>
-      </tr>
+      <tbody>
 
-      <tr>
-        <td>Tải trọng</td>
-        <td id="printCapacity"></td>
-      </tr>
+        <tr>
 
-      <tr>
-        <td>Số Stop</td>
-        <td id="printStop"></td>
-      </tr>
+          <td>
+            Loại thang
+          </td>
 
-      <tr>
-        <td>Số cửa tầng</td>
-        <td id="printDoors"></td>
-      </tr>
+          <td id="printType"></td>
 
-      <tr>
-        <td>Cabin</td>
-        <td id="printCabin"></td>
-      </tr>
+          <td>
+            Tải trọng
+          </td>
 
-      <tr>
-        <td>Cửa tầng</td>
-        <td id="printDoor"></td>
-      </tr>
+          <td id="printCapacity"></td>
 
-      <tr>
-        <td>Máy kéo</td>
-        <td id="printMachine"></td>
-      </tr>
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Số Stop
+          </td>
+
+          <td id="printStop"></td>
+
+          <td>
+            Số cửa tầng
+          </td>
+
+          <td id="printDoors"></td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Cabin
+          </td>
+
+          <td id="printCabin"></td>
+
+          <td>
+            Cửa tầng
+          </td>
+
+          <td id="printDoor"></td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            Máy kéo
+          </td>
+
+          <td
+            id="printMachine"
+            colspan="3"
+          ></td>
+
+        </tr>
+
+      </tbody>
 
     </table>
 
   </div>
 
 
+  <!-- CHI TIẾT GIÁ -->
 
-  <div class="print-prices">
+  <div class="print-prices print-block">
 
     <h2>
       CHI TIẾT GIÁ
@@ -721,6 +768,10 @@
       <thead>
 
         <tr>
+
+          <th>
+            STT
+          </th>
 
           <th>
             Hạng mục
@@ -741,12 +792,21 @@
   </div>
 
 
+  <!-- TỔNG -->
 
   <div class="print-total">
 
-    <span>
-      TỔNG GIÁ BÁO
-    </span>
+    <div>
+
+      <span>
+        TỔNG GIÁ BÁO
+      </span>
+
+      <small>
+        Giá đã bao gồm các hạng mục được lựa chọn
+      </small>
+
+    </div>
 
     <strong id="printTotal">
       285.000.000 đ
@@ -755,11 +815,12 @@
   </div>
 
 
+  <!-- GHI CHÚ -->
 
-  <div class="print-notes">
+  <div class="print-notes print-block">
 
     <h2>
-      GHI CHÚ
+      GHI CHÚ & ĐIỀU KIỆN
     </h2>
 
     <ul>
@@ -791,26 +852,34 @@
   </div>
 
 
+  <!-- FOOTER -->
 
   <div class="print-footer">
 
-    <strong>
-      GROVA HOLDINGS
-    </strong>
+    <div>
 
-    <span>
+      <strong>
+        GROVA HOLDINGS
+      </strong>
+
+      <span>
+        GIẢI PHÁP THANG MÁY CHO CÔNG TRÌNH HIỆN ĐẠI
+      </span>
+
+    </div>
+
+    <div>
       BÁO GIÁ THANG MÁY
-    </span>
+    </div>
 
   </div>
 
 </div>
 
 
-
 <!-- ==================================================
      JAVASCRIPT
-=================================================== -->
+================================================== -->
 
 <script src="data/prices.js"></script>
 
