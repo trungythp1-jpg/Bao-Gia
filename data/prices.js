@@ -1,9 +1,17 @@
 const PRICE_CONFIG = {
-  // Giá cơ bản:
-  // 350kg - 4 Stop - Cabin inox trắng - Torin China - Step China
+
+  // ==============================
+  // GIÁ THANG CƠ BẢN
+  // ==============================
+
   basePrice: 285000000,
 
-  // Tải trọng - giá cộng tịnh tiến
+
+  // ==============================
+  // TẢI TRỌNG
+  // Giá cộng tịnh tiến so với 350kg
+  // ==============================
+
   capacity: {
     350: 0,
     450: 0,
@@ -12,41 +20,109 @@ const PRICE_CONFIG = {
     1000: 60000000
   },
 
-  // Số Stop
+
+  // ==============================
+  // SỐ STOP
+  // ==============================
+
   stop: {
     base: 4,
     additional: 15000000
   },
 
-  // Khung thép
+
+  // ==============================
+  // KHUNG THÉP
   // 4 Stop = 55 triệu
-  // Mỗi Stop tăng thêm = 13 triệu
+  // Mỗi Stop thêm = 13 triệu
+  // ==============================
+
   steelFrame: {
     base: 55000000,
     additional: 13000000
   },
 
-  // Cabin
+
+  // ==============================
+  // CABIN
+  // ==============================
+
   cabin: {
-    "inox-trang": 0,
-    "kinh-inox-trang": 10000000,
-    "inox-mau": 20000000,
-    "kinh-inox-mau": 20000000
+
+    "inox-trang": {
+      name: "Cabin cơ bản – inox trắng",
+      price: 0
+    },
+
+    "kinh-inox-trang": {
+      name: "Cabin kính – inox trắng cơ bản",
+      price: 10000000
+    },
+
+    "inox-mau": {
+      name: "Cabin inox màu",
+      price: 20000000
+    },
+
+    "kinh-inox-mau": {
+      name: "Cabin kính inox màu",
+      price: 20000000
+    }
+
   },
 
-  // Cửa tầng - 2 cánh mở tim
-  // Giá tính theo từng cửa
+
+  // ==============================
+  // CỬA TẦNG
+  // 2 CÁNH MỞ TIM
+  // ==============================
+
   door: {
-    "inox-trang": 0,
-    "kinh-inox-trang": 4000000,
-    "inox-mau": 4000000,
-    "kinh-inox-mau": 6500000
+
+    "inox-trang": {
+      name: "Cửa inox trắng",
+      price: 0
+    },
+
+    "kinh-inox-trang": {
+      name: "Kính inox trắng",
+      price: 4000000
+    },
+
+    "inox-mau": {
+      name: "Inox màu",
+      price: 4000000
+    },
+
+    "kinh-inox-mau": {
+      name: "Kính inox màu",
+      price: 6500000
+    }
+
   },
 
-  // Máy kéo
+
+  // ==============================
+  // MÁY KÉO
+  // ==============================
+
   machine: {
-    "torin": 0,
-    "italy": 55000000,
-    "germany": 60000000
+
+    "torin": {
+      name: "Torin – China",
+      price: 0
+    },
+
+    "italy": {
+      name: "Máy Ý",
+      price: 55000000
+    },
+
+    "germany": {
+      name: "Máy Đức",
+      price: 60000000
+    }
+
   }
+
 };
