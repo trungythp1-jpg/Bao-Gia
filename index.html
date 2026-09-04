@@ -930,8 +930,70 @@
   </div>
 
 
-  <script src="data/prices.js"></script>
-  <script src="script.js"></script>
+  <!-- =====================================================
+       JAVASCRIPT
+       ÉP TẢI PHIÊN BẢN MỚI, KHÔNG DÙNG CACHE
+  ====================================================== -->
+
+  <script>
+    (function () {
+
+      /*
+       * Mỗi lần mở website sẽ tạo một phiên bản mới.
+       * Ví dụ:
+       * data/prices.js?v=1725430000000
+       *
+       * Nhờ vậy trình duyệt không lấy lại
+       * file JavaScript cũ từ cache.
+       */
+
+      const version = Date.now();
+
+      /*
+       * BƯỚC 1
+       * Tải bảng giá trước.
+       */
+      const priceScript = document.createElement("script");
+
+      priceScript.src = "data/prices.js?v=" + version;
+
+      priceScript.onload = function () {
+
+        /*
+         * BƯỚC 2
+         * Chỉ khi prices.js tải thành công
+         * mới tải script tính toán.
+         */
+        const appScript = document.createElement("script");
+
+        appScript.src = "script.js?v=" + version;
+
+        appScript.onload = function () {
+          console.log(
+            "GROVA: prices.js và script.js đã tải phiên bản mới:",
+            version
+          );
+        };
+
+        appScript.onerror = function () {
+          console.error(
+            "GROVA: Không thể tải script.js"
+          );
+        };
+
+        document.body.appendChild(appScript);
+      };
+
+      priceScript.onerror = function () {
+        console.error(
+          "GROVA: Không thể tải data/prices.js"
+        );
+      };
+
+      document.body.appendChild(priceScript);
+
+    })();
+  </script>
 
 </body>
 </html>
