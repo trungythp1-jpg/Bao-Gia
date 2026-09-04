@@ -6,7 +6,7 @@
 const PRICE_CONFIG = {
 
   // Giá cơ bản
-  basePrice: 280000000,
+  basePrice: 285000000,
 
 
   // ===================================================
@@ -96,7 +96,7 @@ const PRICE_CONFIG = {
 
       name: "Cabin kính inox màu",
 
-      price: 20000000
+      price: 15000000
 
     }
 
