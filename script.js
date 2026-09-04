@@ -13,18 +13,250 @@ const ELEVATOR_TYPES = {
   "khung-thep": "Thang Khung thép"
 };
 
+
+/* =========================================================
+   SỐ BÁO GIÁ
+========================================================= */
+
 function generateQuoteNumber() {
+
   const now = new Date();
 
-  const year = now.getFullYear();
-  const month = String(now.getMonth() + 1).padStart(2, "0");
-  const day = String(now.getDate()).padStart(2, "0");
-  const random = String(Math.floor(Math.random() * 10000)).padStart(4, "0");
+  const year =
+    now.getFullYear();
+
+  const month =
+    String(
+      now.getMonth() + 1
+    ).padStart(2, "0");
+
+  const day =
+    String(
+      now.getDate()
+    ).padStart(2, "0");
+
+  const random =
+    String(
+      Math.floor(
+        Math.random() * 10000
+      )
+    ).padStart(4, "0");
 
   return `BG-${year}${month}${day}-${random}`;
 }
 
-const QUOTE_NUMBER = generateQuoteNumber();
+const QUOTE_NUMBER =
+  generateQuoteNumber();
+
+
+/* =========================================================
+   LƯU THÔNG TIN TỰ ĐỘNG
+========================================================= */
+
+const STORAGE_KEY =
+  "grova_quote_form_v1";
+
+
+const FORM_FIELDS = [
+  "customerName",
+  "customerPhone",
+  "projectAddress",
+  "elevatorType",
+  "capacity",
+  "stop",
+  "cabin",
+  "door",
+  "machine"
+];
+
+
+function getFormData() {
+
+  const data = {};
+
+  FORM_FIELDS.forEach(function(id) {
+
+    const element =
+      $(id);
+
+    if (!element) {
+      return;
+    }
+
+    data[id] =
+      element.value;
+
+  });
+
+  return data;
+}
+
+
+function setSaveStatus(
+  type,
+  text
+) {
+
+  const status =
+    $("saveStatus");
+
+  const statusText =
+    $("saveStatusText");
+
+  if (
+    !status ||
+    !statusText
+  ) {
+    return;
+  }
+
+  status.classList.remove(
+    "saving",
+    "error"
+  );
+
+  if (type) {
+
+    status.classList.add(
+      type
+    );
+
+  }
+
+  statusText.textContent =
+    text;
+}
+
+
+function saveFormData() {
+
+  try {
+
+    setSaveStatus(
+      "saving",
+      "Đang lưu..."
+    );
+
+
+    const data =
+      getFormData();
+
+
+    localStorage.setItem(
+      STORAGE_KEY,
+      JSON.stringify(data)
+    );
+
+
+    setSaveStatus(
+      "",
+      "Đã lưu tự động"
+    );
+
+  } catch (error) {
+
+    console.warn(
+      "Không thể lưu dữ liệu:",
+      error
+    );
+
+    setSaveStatus(
+      "error",
+      "Không thể lưu dữ liệu"
+    );
+
+  }
+
+}
+
+
+function loadFormData() {
+
+  try {
+
+    const saved =
+      localStorage.getItem(
+        STORAGE_KEY
+      );
+
+
+    if (!saved) {
+
+      setSaveStatus(
+        "",
+        "Đang lưu tự động"
+      );
+
+      return;
+
+    }
+
+
+    const data =
+      JSON.parse(saved);
+
+
+    FORM_FIELDS.forEach(function(id) {
+
+      const element =
+        $(id);
+
+
+      if (
+        !element ||
+        data[id] === undefined ||
+        data[id] === null
+      ) {
+        return;
+      }
+
+
+      element.value =
+        data[id];
+
+    });
+
+
+    setSaveStatus(
+      "",
+      "Đã khôi phục báo giá"
+    );
+
+  } catch (error) {
+
+    console.warn(
+      "Không thể khôi phục dữ liệu:",
+      error
+    );
+
+    setSaveStatus(
+      "error",
+      "Không thể khôi phục dữ liệu"
+    );
+
+  }
+
+}
+
+
+function clearSavedFormData() {
+
+  try {
+
+    localStorage.removeItem(
+      STORAGE_KEY
+    );
+
+  } catch (error) {
+
+    console.warn(
+      "Không thể xóa dữ liệu đã lưu:",
+      error
+    );
+
+  }
+
+}
 
 
 /* =========================
@@ -371,7 +603,9 @@ function updatePrintQuote(quote) {
 function resetForm() {
 
   $("customerName").value = "";
+
   $("customerPhone").value = "";
+
   $("projectAddress").value = "";
 
   $("elevatorType").value =
@@ -391,6 +625,18 @@ function resetForm() {
 
   $("machine").value =
     "torin";
+
+
+  /* XÓA DỮ LIỆU ĐÃ LƯU */
+
+  clearSavedFormData();
+
+
+  setSaveStatus(
+    "",
+    "Đã xóa dữ liệu lưu"
+  );
+
 
   updateWebsite();
 }
@@ -419,6 +665,14 @@ function createPDF() {
 
 function init() {
 
+  /*
+   * KHÔI PHỤC DỮ LIỆU TRƯỚC
+   * KHI TÍNH GIÁ
+   */
+
+  loadFormData();
+
+
   const fields = [
     "customerName",
     "customerPhone",
@@ -434,20 +688,36 @@ function init() {
 
   fields.forEach(function(id) {
 
-    const element = $(id);
+    const element =
+      $(id);
+
 
     if (!element) {
       return;
     }
 
+
     element.addEventListener(
       "input",
-      updateWebsite
+      function() {
+
+        updateWebsite();
+
+        saveFormData();
+
+      }
     );
+
 
     element.addEventListener(
       "change",
-      updateWebsite
+      function() {
+
+        updateWebsite();
+
+        saveFormData();
+
+      }
     );
 
   });
