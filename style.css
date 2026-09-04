@@ -1,1330 +1,701 @@
-/* =====================================================
-   GROVA HOLDINGS
-   BÁO GIÁ THANG MÁY
-===================================================== */
-
 * {
   box-sizing: border-box;
 }
 
+:root {
+  --green: #2f8065;
+  --green-dark: #21664f;
+  --green-light: #eaf4ef;
+  --green-soft: #f4f9f6;
+  --text: #24332d;
+  --muted: #718078;
+  --border: #d7e0dc;
+  --white: #ffffff;
+  --danger: #9b4a4a;
+}
 
 html {
   scroll-behavior: smooth;
 }
 
-
 body {
-
   margin: 0;
-
   background: #f3f7f5;
-
-  color: #17221e;
-
+  color: var(--text);
   font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
     Arial,
+    Helvetica,
     sans-serif;
-
+  line-height: 1.45;
 }
 
-
-/* =====================================================
+/* =========================
    HEADER
-===================================================== */
+========================= */
 
 .header {
-
-  background: white;
-
-  padding: 28px 24px;
-
-  border-bottom: 1px solid #dce8e2;
-
+  background: #ffffff;
+  border-bottom: 1px solid #e0e7e3;
+  padding: 14px 20px;
 }
-
 
 .brand {
-
-  display: flex;
-
-  align-items: center;
-
-  gap: 16px;
-
-  max-width: 900px;
-
+  max-width: 1100px;
   margin: auto;
-
-}
-
-
-.logo-box {
-
-  width: 70px;
-
-  height: 70px;
-
-  border-radius: 20px;
-
-  background: #34805f;
-
-  color: white;
-
   display: flex;
-
   align-items: center;
+}
 
-  justify-content: center;
-
-  font-size: 40px;
-
-  font-weight: 800;
-
+.main-logo {
+  width: 185px;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
 
-.brand-name {
-
-  font-size: 32px;
-
-  line-height: 1;
-
-  font-weight: 800;
-
-  color: #34805f;
-
-  letter-spacing: 1px;
-
-}
-
-
-.brand-sub {
-
-  font-size: 16px;
-
-  margin-top: 7px;
-
-  letter-spacing: 6px;
-
-  color: #6e7974;
-
-}
-
-
-/* =====================================================
+/* =========================
    HERO
-===================================================== */
+========================= */
 
 .hero {
-
-  max-width: 900px;
-
-  margin: auto;
-
-  padding: 50px 24px 35px;
-
+  max-width: 1100px;
+  margin: 22px auto 0;
+  padding: 34px 24px;
+  text-align: center;
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #edf7f2
+  );
+  border: 1px solid var(--border);
+  border-radius: 18px;
 }
-
 
 .eyebrow {
-
-  color: #34805f;
-
-  font-weight: 800;
-
-  letter-spacing: 4px;
-
-  font-size: 18px;
-
+  color: var(--green);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
 }
-
 
 .hero h1 {
-
-  margin: 18px 0 8px;
-
-  font-size: clamp(38px, 8vw, 64px);
-
-  line-height: 1.05;
-
-  letter-spacing: -2px;
-
+  margin: 8px 0 6px;
+  font-size: 30px;
+  color: var(--green-dark);
 }
-
 
 .hero p {
-
   margin: 0;
-
-  font-size: 23px;
-
-  color: #6d7873;
-
+  color: var(--muted);
 }
-
 
 .valid-box {
-
-  margin-top: 35px;
-
   display: inline-flex;
-
-  flex-direction: column;
-
-  padding: 18px 28px;
-
-  border-radius: 22px;
-
-  background: #eaf5ef;
-
-  color: #28684d;
-
+  gap: 10px;
+  align-items: center;
+  margin-top: 18px;
+  padding: 8px 15px;
+  border-radius: 30px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  font-size: 13px;
 }
-
-
-.valid-box span {
-
-  font-size: 17px;
-
-}
-
 
 .valid-box strong {
-
-  margin-top: 3px;
-
-  font-size: 28px;
-
+  font-size: 14px;
 }
 
 
-/* =====================================================
+/* =========================
    CONTAINER
-===================================================== */
+========================= */
 
 .container {
-
-  max-width: 900px;
-
-  margin: auto;
-
-  padding: 10px 20px 70px;
-
+  max-width: 1100px;
+  margin: 22px auto 50px;
+  padding: 0 16px;
 }
 
 
-/* =====================================================
+/* =========================
    CARD
-===================================================== */
+========================= */
 
 .card {
-
-  background: white;
-
-  border: 1px solid #dce8e2;
-
-  border-radius: 28px;
-
-  padding: 32px;
-
-  margin-bottom: 22px;
-
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 18px;
   box-shadow:
-    0 8px 30px rgba(34, 65, 52, 0.04);
-
+    0 4px 18px rgba(31, 66, 52, 0.05);
 }
-
 
 .section-head {
-
   display: flex;
-
-  gap: 20px;
-
   align-items: center;
-
-  margin-bottom: 30px;
-
+  gap: 13px;
+  margin-bottom: 20px;
 }
-
 
 .number {
-
-  min-width: 68px;
-
-  height: 68px;
-
-  border-radius: 20px;
-
-  background: #eaf5ef;
-
-  color: #34805f;
-
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: var(--green);
+  color: #ffffff;
   display: flex;
-
-  justify-content: center;
-
   align-items: center;
-
-  font-size: 24px;
-
+  justify-content: center;
   font-weight: 800;
-
+  font-size: 14px;
+  flex-shrink: 0;
 }
-
 
 .section-head h2 {
-
   margin: 0;
-
-  font-size: 32px;
-
+  font-size: 19px;
 }
-
 
 .section-head p {
-
-  margin: 5px 0 0;
-
-  color: #74807b;
-
-  font-size: 18px;
-
+  margin: 3px 0 0;
+  color: var(--muted);
+  font-size: 13px;
 }
 
 
-/* =====================================================
+/* =========================
    FORM
-===================================================== */
+========================= */
 
 .form-group {
-
-  margin-bottom: 24px;
-
+  margin-bottom: 16px;
 }
-
 
 .form-group label {
-
   display: block;
-
-  font-size: 19px;
-
-  font-weight: 750;
-
-  margin-bottom: 9px;
-
+  margin-bottom: 7px;
+  font-size: 13px;
+  font-weight: 700;
 }
-
 
 input,
 select {
-
   width: 100%;
-
-  min-height: 62px;
-
-  border: 2px solid #d8e2dd;
-
-  border-radius: 18px;
-
-  background: white;
-
-  padding: 0 18px;
-
-  font-size: 19px;
-
-  color: #17221e;
-
+  min-height: 45px;
+  padding: 10px 13px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: #ffffff;
+  color: var(--text);
+  font-size: 14px;
   outline: none;
-
 }
-
 
 input:focus,
 select:focus {
-
-  border-color: #34805f;
-
+  border-color: var(--green);
+  box-shadow:
+    0 0 0 3px rgba(47, 128, 101, 0.10);
 }
-
-
-input::placeholder {
-
-  color: #a1aaa6;
-
-}
-
 
 .hint {
-
-  color: #78847f;
-
-  margin-top: 8px;
-
-  font-size: 16px;
-
+  margin-top: 5px;
+  color: var(--muted);
+  font-size: 12px;
 }
 
 
-/* =====================================================
+/* =========================
    SUMMARY
-===================================================== */
+========================= */
 
 .summary-grid {
-
   display: grid;
-
   grid-template-columns:
     repeat(3, 1fr);
-
-  gap: 15px;
-
-  margin-top: 28px;
-
+  gap: 12px;
+  margin-top: 18px;
 }
-
 
 .summary-box {
-
-  padding: 22px;
-
-  background: #edf7f2;
-
-  border-radius: 22px;
-
+  padding: 14px;
+  background: var(--green-soft);
+  border: 1px solid #dceae4;
+  border-radius: 10px;
 }
-
 
 .summary-box span {
-
   display: block;
-
-  color: #78847f;
-
-  margin-bottom: 8px;
-
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 4px;
 }
-
 
 .summary-box strong {
-
-  color: #28684d;
-
-  font-size: 21px;
-
+  font-size: 14px;
 }
 
 
-/* =====================================================
+/* =========================
    QUOTE DETAILS
-===================================================== */
+========================= */
 
 .quote-details {
-
-  border-top: 1px solid #e2e9e5;
-
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
 }
-
 
 .quote-row {
-
   display: flex;
-
+  align-items: center;
   justify-content: space-between;
-
-  gap: 20px;
-
-  padding: 17px 0;
-
-  border-bottom: 1px solid #e5ebe8;
-
+  gap: 15px;
+  padding: 12px 14px;
+  border-bottom: 1px solid #e6ece9;
+  font-size: 14px;
 }
 
-
-.quote-row span {
-
-  color: #505d57;
-
+.quote-row:last-child {
+  border-bottom: none;
 }
-
 
 .quote-row strong {
-
   white-space: nowrap;
-
 }
 
 
-.quote-row strong.zero {
-
-  color: #8a9490;
-
-}
-
-
-/* =====================================================
+/* =========================
    TOTAL
-===================================================== */
+========================= */
 
 .total-box {
-
-  margin-top: 25px;
-
-  padding: 30px;
-
-  border-radius: 26px;
-
-  background: #34805f;
-
-  color: white;
-
+  margin-top: 16px;
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: var(--green);
+  color: #ffffff;
 }
-
 
 .total-box span {
-
   display: block;
-
-  font-size: 22px;
-
+  font-size: 14px;
   font-weight: 800;
-
-  letter-spacing: 2px;
-
 }
-
 
 .total-box small {
-
   display: block;
-
-  margin-top: 8px;
-
-  color: #d6ebe1;
-
-  font-size: 16px;
-
+  margin-top: 3px;
+  opacity: 0.82;
 }
-
 
 .total-box strong {
-
   display: block;
-
-  margin-top: 18px;
-
-  font-size: clamp(34px, 7vw, 52px);
-
+  margin-top: 8px;
+  font-size: 27px;
 }
 
 
-/* =====================================================
+/* =========================
    NOTES
-===================================================== */
+========================= */
 
 .notes {
-
   margin: 0;
-
-  padding-left: 25px;
-
+  padding-left: 20px;
+  color: #52615a;
+  font-size: 14px;
 }
-
 
 .notes li {
-
-  margin-bottom: 15px;
-
-  color: #5e6965;
-
-  font-size: 18px;
-
-  line-height: 1.6;
-
+  margin-bottom: 8px;
 }
 
 
-/* =====================================================
+/* =========================
    BUTTONS
-===================================================== */
+========================= */
 
 .buttons {
-
-  display: grid;
-
-  grid-template-columns: 1fr 1fr;
-
-  gap: 16px;
-
+  display: flex;
+  gap: 12px;
 }
-
 
 .btn {
-
-  border: 0;
-
-  min-height: 68px;
-
-  border-radius: 22px;
-
-  font-size: 21px;
-
-  font-weight: 800;
-
+  flex: 1;
+  min-height: 48px;
+  border: none;
+  border-radius: 10px;
   cursor: pointer;
-
+  font-size: 14px;
+  font-weight: 700;
 }
-
 
 .btn.reset {
-
-  background: #e5ebe8;
-
-  color: #46534e;
-
+  background: #e8eeeb;
+  color: #4d5d55;
 }
-
 
 .btn.print {
+  background: var(--green);
+  color: #ffffff;
+}
 
-  background: #225f46;
-
-  color: white;
-
+.btn:hover {
+  opacity: 0.92;
 }
 
 
-.btn:active {
-
-  transform: scale(.98);
-
-}
-
-
-/* =====================================================
+/* =========================
    PRINT AREA
-===================================================== */
+========================= */
 
 .print-area {
-
   display: none;
-
 }
 
 
-/* =====================================================
+/* =========================
    MOBILE
-===================================================== */
+========================= */
 
-@media (max-width: 650px) {
+@media (max-width: 700px) {
 
   .header {
-
-    padding: 20px;
-
+    padding: 12px 16px;
   }
 
-
-  .logo-box {
-
-    width: 60px;
-
-    height: 60px;
-
-    font-size: 34px;
-
+  .main-logo {
+    width: 155px;
   }
-
-
-  .brand-name {
-
-    font-size: 28px;
-
-  }
-
 
   .hero {
-
-    padding: 35px 20px 25px;
-
+    margin: 14px 12px 0;
+    padding: 26px 16px;
   }
-
 
   .hero h1 {
-
-    font-size: 40px;
-
+    font-size: 24px;
   }
-
-
-  .hero p {
-
-    font-size: 19px;
-
-  }
-
 
   .container {
-
-    padding: 5px 15px 50px;
-
+    padding: 0 12px;
   }
-
 
   .card {
-
-    padding: 24px 20px;
-
-    border-radius: 24px;
-
+    padding: 18px;
   }
-
-
-  .section-head {
-
-    gap: 14px;
-
-  }
-
-
-  .number {
-
-    min-width: 58px;
-
-    height: 58px;
-
-  }
-
-
-  .section-head h2 {
-
-    font-size: 27px;
-
-  }
-
-
-  .section-head p {
-
-    font-size: 16px;
-
-  }
-
 
   .summary-grid {
-
     grid-template-columns: 1fr;
-
   }
-
-
-  .quote-row {
-
-    flex-direction: column;
-
-    gap: 5px;
-
-  }
-
-
-  .quote-row strong {
-
-    font-size: 17px;
-
-  }
-
 
   .buttons {
-
-    grid-template-columns: 1fr;
-
+    flex-direction: column;
   }
 
+  .quote-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 4px;
+  }
 }
 
 
-/* =====================================================
+/* =========================================================
    PRINT / PDF
-===================================================== */
+========================================================= */
 
 @media print {
 
   @page {
-
     size: A4 portrait;
-
-    margin: 10mm 12mm;
-
+    margin: 8mm 10mm;
   }
-
 
   html,
   body {
-
     margin: 0 !important;
-
     padding: 0 !important;
-
-    background: white !important;
-
+    background: #ffffff !important;
   }
-
 
   body > * {
-
     display: none !important;
-
   }
 
-
-  .print-area {
-
+  #printArea {
     display: block !important;
-
     width: 100%;
-
-    color: #17221e;
-
-    background: white;
-
+    color: #26342e;
     font-family:
       Arial,
       Helvetica,
       sans-serif;
-
-    font-size: 11px;
-
   }
 
+  .print-area {
+    font-size: 9.5px;
+    line-height: 1.25;
+  }
 
-  /* ===================================================
-     PDF HEADER
-  =================================================== */
+  /* HEADER */
 
   .print-header {
-
     display: flex;
-
     justify-content: space-between;
-
-    align-items: flex-start;
-
-    padding: 0 0 14px;
-
-    margin-bottom: 16px;
-
-    border-bottom: 2px solid #34805f;
-
+    align-items: center;
+    min-height: 25mm;
+    padding-bottom: 4mm;
+    border-bottom: 1.2px solid #378266;
   }
-
 
   .print-brand {
-
-    display: flex;
-
-    gap: 10px;
-
-    align-items: center;
-
+    width: 48%;
   }
 
-
-  .print-logo {
-
-    width: 48px;
-
-    height: 48px;
-
-    border-radius: 10px;
-
-    background: #34805f;
-
-    color: white;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    font-size: 27px;
-
-    font-weight: 800;
-
+  .print-logo-image {
+    display: block;
+    width: 52mm;
+    height: auto;
+    max-height: 25mm;
+    object-fit: contain;
+    object-position: left center;
   }
-
-
-  .print-grova {
-
-    font-size: 25px;
-
-    line-height: 1;
-
-    font-weight: 800;
-
-    color: #34805f;
-
-  }
-
-
-  .print-holdings {
-
-    margin-top: 4px;
-
-    font-size: 9px;
-
-    letter-spacing: 4px;
-
-    color: #66736d;
-
-  }
-
 
   .print-title {
-
+    width: 48%;
     text-align: right;
-
   }
-
 
   .print-title h1 {
-
-    margin: 0 0 7px;
-
-    font-size: 22px;
-
-    line-height: 1.1;
-
-    color: #17221e;
-
+    margin: 0 0 3px;
+    color: #172a22;
+    font-size: 20px;
+    line-height: 1.15;
   }
-
 
   .print-title p {
-
     margin: 2px 0;
-
-    font-size: 10px;
-
-    color: #59655f;
-
-  }
-
-
-  .print-title strong {
-
-    color: #17221e;
-
-  }
-
-
-  /* ===================================================
-     BLOCK
-  =================================================== */
-
-  .print-block {
-
-    margin-top: 15px;
-
-    page-break-inside: avoid;
-
-    break-inside: avoid;
-
-  }
-
-
-  .print-block h2 {
-
-    margin: 0 0 8px;
-
-    padding: 6px 9px;
-
-    background: #edf7f2;
-
-    border-left: 4px solid #34805f;
-
-    color: #28684d;
-
-    font-size: 11px;
-
-    font-weight: 800;
-
-    letter-spacing: .5px;
-
-  }
-
-
-  /* ===================================================
-     CUSTOMER
-  =================================================== */
-
-  .customer-grid {
-
-    display: grid;
-
-    grid-template-columns: 1fr 1fr;
-
-    gap: 8px 20px;
-
-    border: 1px solid #d8e1dd;
-
-    padding: 10px 12px;
-
-  }
-
-
-  .customer-grid > div {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 3px;
-
-  }
-
-
-  .customer-grid .full {
-
-    grid-column: 1 / -1;
-
-  }
-
-
-  .customer-grid span {
-
-    color: #74807a;
-
+    color: #65736d;
     font-size: 9px;
-
-    text-transform: uppercase;
-
-    letter-spacing: .3px;
-
   }
 
+  /* SECTION TITLE */
 
-  .customer-grid strong {
-
-    font-size: 11px;
-
-    font-weight: 700;
-
-    color: #17221e;
-
+  .print-customer h2,
+  .print-config h2,
+  .print-prices h2,
+  .print-notes h2 {
+    margin: 0 0 3mm;
+    padding: 1.9mm 3mm;
+    border-left: 2mm solid #378266;
+    background: #eaf4ef;
+    color: #316e59;
+    font-size: 10.5px;
+    letter-spacing: 0.5px;
   }
-
-
-  /* ===================================================
-     TABLE
-  =================================================== */
-
-  .print-area table {
-
-    width: 100%;
-
-    border-collapse: collapse;
-
-    table-layout: fixed;
-
-  }
-
-
-  .print-area td,
-  .print-area th {
-
-    border: 1px solid #d5dfda;
-
-    padding: 6px 8px;
-
-    font-size: 10px;
-
-    line-height: 1.3;
-
-    vertical-align: middle;
-
-  }
-
-
-  .print-area th {
-
-    background: #edf5f1;
-
-    color: #28684d;
-
-    font-weight: 800;
-
-  }
-
-
-  /* CONFIG TABLE */
-
-  .print-config td:nth-child(1),
-  .print-config td:nth-child(3) {
-
-    width: 18%;
-
-    background: #f5f8f6;
-
-    color: #59655f;
-
-    font-weight: 700;
-
-  }
-
-
-  .print-config td:nth-child(2) {
-
-    width: 32%;
-
-  }
-
-
-  .print-config td:nth-child(4) {
-
-    width: 32%;
-
-  }
-
-
-  .print-config td {
-
-    height: 27px;
-
-  }
-
-
-  /* PRICE TABLE */
-
-  .print-prices th:first-child {
-
-    width: 9%;
-
-    text-align: center;
-
-  }
-
-
-  .print-prices th:nth-child(2) {
-
-    width: 66%;
-
-  }
-
-
-  .print-prices th:nth-child(3) {
-
-    width: 25%;
-
-    text-align: right;
-
-  }
-
-
-  .print-prices td:first-child {
-
-    text-align: center;
-
-    color: #66736d;
-
-  }
-
-
-  .print-prices td:nth-child(3) {
-
-    text-align: right;
-
-    font-weight: 700;
-
-    white-space: nowrap;
-
-  }
-
-
-  /* ===================================================
-     TOTAL
-  =================================================== */
-
-  .print-total {
-
-    margin-top: 13px;
-
-    padding: 12px 15px;
-
-    background: #34805f;
-
-    color: white;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    page-break-inside: avoid;
-
-    break-inside: avoid;
-
-  }
-
-
-  .print-total span {
-
-    display: block;
-
-    font-size: 12px;
-
-    font-weight: 800;
-
-    letter-spacing: 1px;
-
-  }
-
-
-  .print-total small {
-
-    display: block;
-
-    margin-top: 3px;
-
-    font-size: 8px;
-
-    color: #d9ebe2;
-
-  }
-
-
-  .print-total strong {
-
-    font-size: 21px;
-
-    white-space: nowrap;
-
-  }
-
-
-  /* ===================================================
-     NOTES
-  =================================================== */
-
-  .print-notes {
-
-    margin-top: 14px;
-
-  }
-
-
-  .print-notes ul {
-
-    margin: 7px 0 0;
-
-    padding-left: 17px;
-
-  }
-
-
-  .print-notes li {
-
-    margin-bottom: 3px;
-
-    color: #56635d;
-
-    font-size: 9px;
-
-    line-height: 1.35;
-
-  }
-
-
-  /* ===================================================
-     FOOTER
-  =================================================== */
-
-  .print-footer {
-
-    margin-top: 18px;
-
-    padding-top: 8px;
-
-    border-top: 1px solid #d5dfda;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: flex-end;
-
-    color: #66736d;
-
-    font-size: 8px;
-
-    page-break-inside: avoid;
-
-  }
-
-
-  .print-footer div {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 2px;
-
-  }
-
-
-  .print-footer strong {
-
-    color: #34805f;
-
-    font-size: 10px;
-
-  }
-
-}
-
-
-/* =====================================================
-   PRINT OPTIMIZATION
-===================================================== */
-
-@media print {
 
   .print-customer,
   .print-config,
   .print-prices,
-  .print-notes,
-  .print-total,
+  .print-notes {
+    margin-top: 4mm;
+  }
+
+  /* CUSTOMER */
+
+  .customer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid #d5ddd9;
+    min-height: 19mm;
+    padding: 3mm 4mm;
+  }
+
+  .customer-grid div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .customer-grid span {
+    margin-bottom: 1mm;
+    color: #87918d;
+    font-size: 7.5px;
+    font-weight: 700;
+  }
+
+  .customer-grid strong {
+    color: #26342e;
+    font-size: 10px;
+  }
+
+  .customer-address {
+    grid-column: 1 / -1;
+    margin-top: 2mm;
+  }
+
+  /* TABLES */
+
+  .print-area table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  .print-area td,
+  .print-area th {
+    border: 1px solid #d4ddd8;
+    padding: 2.1mm 2.5mm;
+    vertical-align: middle;
+  }
+
+  .print-config td {
+    font-size: 9px;
+  }
+
+  .print-config td:nth-child(1),
+  .print-config td:nth-child(3) {
+    width: 18%;
+    background: #f1f5f3;
+    font-weight: 700;
+    color: #52615a;
+  }
+
+  .print-config td:nth-child(2) {
+    width: 32%;
+  }
+
+  .print-config td:nth-child(4) {
+    width: 32%;
+  }
+
+  /* PRICE TABLE */
+
+  .print-prices table {
+    page-break-inside: avoid;
+  }
+
+  .print-prices th {
+    background: #edf5f1;
+    color: #316e59;
+    font-weight: 800;
+    font-size: 8.8px;
+    text-align: center;
+  }
+
+  .print-prices th:first-child {
+    width: 9%;
+  }
+
+  .print-prices th:nth-child(2) {
+    width: 66%;
+  }
+
+  .print-prices th:nth-child(3) {
+    width: 25%;
+  }
+
+  .print-prices td {
+    font-size: 8.8px;
+  }
+
+  .print-prices td:first-child {
+    text-align: center;
+  }
+
+  .print-prices td:last-child {
+    text-align: right;
+    white-space: nowrap;
+    font-weight: 700;
+  }
+
+  .print-prices tr {
+    page-break-inside: avoid;
+  }
+
+  /* TOTAL */
+
+  .print-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4mm;
+    padding: 4mm 5mm;
+    background: #378266;
+    color: #ffffff;
+  }
+
+  .print-total span {
+    display: block;
+    font-size: 11px;
+    font-weight: 800;
+  }
+
+  .print-total small {
+    display: block;
+    margin-top: 1mm;
+    opacity: 0.85;
+    font-size: 7.5px;
+  }
+
+  .print-total strong {
+    font-size: 20px;
+    white-space: nowrap;
+  }
+
+  /* NOTES */
+
+  .print-notes {
+    margin-top: 3.5mm;
+  }
+
+  .print-notes h2 {
+    margin-bottom: 2mm;
+  }
+
+  .print-notes ul {
+    margin: 0;
+    padding-left: 5mm;
+  }
+
+  .print-notes li {
+    margin-bottom: 1.2mm;
+    font-size: 8.3px;
+  }
+
+  /* FOOTER */
+
   .print-footer {
-
-    page-break-inside: avoid;
-
-    break-inside: avoid;
-
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: 5mm;
+    padding-top: 3mm;
+    border-top: 1px solid #d5ddd9;
+    color: #718078;
   }
 
-
-  tr {
-
-    page-break-inside: avoid;
-
-    break-inside: avoid;
-
+  .print-footer div {
+    display: flex;
+    flex-direction: column;
   }
 
+  .print-footer strong {
+    color: #378266;
+    font-size: 9px;
+  }
 
-  h1,
-  h2 {
+  .print-footer span {
+    font-size: 7px;
+    margin-top: 1mm;
+  }
 
-    page-break-after: avoid;
-
-    break-after: avoid;
-
+  .print-footer > span {
+    text-align: right;
   }
 
 }
