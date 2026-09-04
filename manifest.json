@@ -1,0 +1,19 @@
+{
+  "name": "GROVA QUOTATION",
+  "short_name": "GROVA",
+  "description": "Hệ thống báo giá thang máy GROVA HOLDINGS",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b7a5c",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./data/grova_logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
