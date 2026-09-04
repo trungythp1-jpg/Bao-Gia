@@ -2018,3 +2018,59 @@ select:focus {
   }
 
 }
+/* =========================================
+   NÚT ĐĂNG NHẬP
+   ========================================= */
+
+.admin-login-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 10px 16px;
+
+  border-radius: 10px;
+
+  background: #0b7a5c;
+  color: #ffffff;
+
+  text-decoration: none;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  white-space: nowrap;
+
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.admin-login-btn:hover {
+  background: #09664d;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.admin-login-btn:active {
+  transform: translateY(0);
+}
+
+
+/* Điện thoại */
+
+@media (max-width: 700px) {
+
+  .admin-login-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+}
