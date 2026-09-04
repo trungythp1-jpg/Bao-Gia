@@ -96,7 +96,7 @@ const PRICE_CONFIG = {
 
       name: "Cabin kính inox màu",
 
-      price: 20000000
+      price: 15000000
 
     }
 
