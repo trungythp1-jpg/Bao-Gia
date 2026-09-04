@@ -19,6 +19,19 @@
     href="style.css"
   >
 
+
+  <style>
+    .address-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .address-detail-field{grid-column:1/-1}
+    .address-sub-label{display:block;margin-bottom:8px;font-size:13px;font-weight:700}
+    .address-field .input-wrap input{width:100%}
+    .address-preview{margin-top:14px;padding:13px 15px;border:1px solid rgba(31,125,82,.16);border-radius:12px;background:rgba(31,125,82,.045);line-height:1.55}
+    .address-preview span{display:block;margin-bottom:3px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;opacity:.65}
+    .address-preview strong{display:block;font-size:14px}
+    #wardHint{min-height:18px}
+    @media(max-width:700px){.address-grid{grid-template-columns:1fr}.address-detail-field{grid-column:auto}}
+  </style>
+
 </head>
 
 
@@ -279,42 +292,54 @@
           </div>
 
         </div>
-
-
-
-        <!-- ĐỊA CHỈ -->
-
-        <div class="form-group full">
-
-          <label for="projectAddress">
-
-            Địa chỉ công trình
-            <span aria-hidden="true">*</span>
-
+        <!-- ĐỊA CHỈ CÔNG TRÌNH -->
+        <div class="form-group full address-group">
+          <label>
+            Địa chỉ công trình <span aria-hidden="true">*</span>
           </label>
 
+          <div class="address-grid">
+            <div class="address-field">
+              <label class="address-sub-label" for="projectProvince">Tỉnh / Thành phố</label>
+              <div class="input-wrap">
+                <span class="input-icon">03</span>
+                <input id="projectProvince" type="text" list="provinceList"
+                  placeholder="Chọn hoặc nhập tỉnh / thành phố"
+                  autocomplete="address-level1" required>
+              </div>
+              <datalist id="provinceList"></datalist>
+            </div>
 
-          <div class="input-wrap">
+            <div class="address-field">
+              <label class="address-sub-label" for="projectWard">Phường / Xã</label>
+              <div class="input-wrap">
+                <span class="input-icon">04</span>
+                <input id="projectWard" type="text" list="wardList"
+                  placeholder="Chọn hoặc nhập phường / xã"
+                  autocomplete="address-level2" required disabled>
+              </div>
+              <datalist id="wardList"></datalist>
+              <div class="hint" id="wardHint">Chọn Tỉnh / Thành phố trước</div>
+            </div>
 
-            <span class="input-icon">
-              03
-            </span>
-
-
-            <input
-              id="projectAddress"
-              type="text"
-              placeholder="Nhập đầy đủ địa chỉ công trình"
-              autocomplete="street-address"
-              minlength="5"
-              required
-            >
-
+            <div class="address-field address-detail-field">
+              <label class="address-sub-label" for="projectAddressDetail">Địa chỉ chi tiết</label>
+              <div class="input-wrap">
+                <span class="input-icon">05</span>
+                <input id="projectAddressDetail" type="text"
+                  placeholder="Số nhà, tên đường, thôn / xóm..."
+                  autocomplete="street-address" minlength="2" required>
+              </div>
+            </div>
           </div>
 
-        </div>
+          <input id="projectAddress" type="hidden" value="">
 
-      </div>
+          <div class="address-preview" aria-live="polite">
+            <span>Địa chỉ hoàn chỉnh:</span>
+            <strong id="projectAddressPreview">Chưa nhập địa chỉ</strong>
+          </div>
+        </div></div>
 
 
 
@@ -1301,6 +1326,70 @@
   </div>
 
 
+
+
+  <script>
+  (function(){
+    const p=document.getElementById("projectProvince");
+    const w=document.getElementById("projectWard");
+    const d=document.getElementById("projectAddressDetail");
+    const a=document.getElementById("projectAddress");
+    const pl=document.getElementById("provinceList");
+    const wl=document.getElementById("wardList");
+    const pv=document.getElementById("projectAddressPreview");
+    const wh=document.getElementById("wardHint");
+    if(!p||!w||!d||!a)return;
+
+    const API="https://provinces.open-api.vn/api";
+    let provinces=[];
+
+    function clean(v){return String(v||"").trim().replace(/\s+/g," ")}
+    function sync(){
+      const full=[clean(d.value),clean(w.value),clean(p.value)].filter(Boolean).join(", ");
+      a.value=full; pv.textContent=full||"Chưa nhập địa chỉ";
+      a.dispatchEvent(new Event("input",{bubbles:true}));
+      a.dispatchEvent(new Event("change",{bubbles:true}));
+    }
+    function options(list,target){
+      target.innerHTML="";
+      list.forEach(x=>{const o=document.createElement("option");o.value=x.name;target.appendChild(o)})
+    }
+    async function loadProvinces(){
+      try{
+        const r=await fetch(API+"/p/");
+        if(!r.ok)throw Error();
+        provinces=await r.json(); options(provinces,pl);
+        wh.textContent="Chọn Tỉnh / Thành phố để tải Phường / Xã.";
+      }catch(e){
+        w.disabled=false; wh.textContent="Không tải được danh sách. Bạn vẫn có thể nhập thủ công.";
+      }
+    }
+    async function loadWards(){
+      const name=clean(p.value);
+      const found=provinces.find(x=>clean(x.name).toLowerCase()===name.toLowerCase());
+      wl.innerHTML=""; w.value="";
+      if(!found){
+        w.disabled=!name; wh.textContent=name?"Tên tỉnh/thành chưa khớp. Có thể nhập Phường / Xã thủ công.":"Chọn Tỉnh / Thành phố trước."; sync(); return;
+      }
+      w.disabled=true; wh.textContent="Đang tải Phường / Xã...";
+      try{
+        const r=await fetch(API+"/p/"+found.code+"?depth=2");
+        if(!r.ok)throw Error();
+        const data=await r.json();
+        const wards=(data.districts||[]).flatMap(x=>x.wards||[]);
+        options(wards,wl); w.disabled=false;
+        wh.textContent=wards.length?"Gõ tên để tìm nhanh Phường / Xã.":"Có thể nhập Phường / Xã thủ công.";
+      }catch(e){
+        w.disabled=false; wh.textContent="Không tải được danh sách. Bạn vẫn có thể nhập thủ công.";
+      }
+      sync();
+    }
+    p.addEventListener("change",loadWards); p.addEventListener("blur",loadWards);
+    w.addEventListener("input",sync); w.addEventListener("change",sync);
+    d.addEventListener("input",sync); d.addEventListener("change",sync);
+    loadProvinces();
+  })();
+  </script>
 
   <!-- =====================================================
        SUPABASE
