@@ -1,125 +1,100 @@
+// =====================================================
+// GROVA HOLDINGS
+// BỘ TÍNH GIÁ THANG MÁY
+// =====================================================
+
+
 const $ = (id) =>
   document.getElementById(id);
 
 
-/* =========================
+
+/* =====================================================
    TÊN HIỂN THỊ
-========================= */
+===================================================== */
 
-const LABELS = {
+const TYPE_NAME = {
 
-  type: {
-    "ho-xay": "Thang Hố xây",
-    "khung-thep": "Thang Khung thép"
-  },
+  "ho-xay":
+    "Thang Hố xây",
 
-  capacity: {
-    350: "350 kg",
-    450: "450 kg",
-    630: "630 kg",
-    750: "750 kg",
-    1000: "1.000 kg"
-  },
-
-  cabin: {
-    "inox-trang":
-      "Cabin cơ bản – inox trắng",
-
-    "kinh-inox-trang":
-      "Cabin kính – inox trắng cơ bản",
-
-    "inox-mau":
-      "Cabin inox màu",
-
-    "kinh-inox-mau":
-      "Cabin kính inox màu"
-  },
-
-  door: {
-    "inox-trang":
-      "Cửa inox trắng",
-
-    "kinh-inox-trang":
-      "Kính inox trắng",
-
-    "inox-mau":
-      "Inox màu",
-
-    "kinh-inox-mau":
-      "Kính inox màu"
-  },
-
-  machine: {
-    "torin":
-      "Torin – China",
-
-    "italy":
-      "Máy Ý",
-
-    "germany":
-      "Máy Đức"
-  }
+  "khung-thep":
+    "Thang Khung thép"
 
 };
 
 
-/* =========================
-   ĐỊNH DẠNG TIỀN
-========================= */
 
-function money(value) {
+/* =====================================================
+   FORMAT TIỀN
+===================================================== */
 
-  return new Intl.NumberFormat(
-    "vi-VN"
-  ).format(value) + " đ";
+function money(number) {
+
+  return (
+    new Intl.NumberFormat("vi-VN")
+      .format(number)
+    + " đ"
+  );
 
 }
 
 
-/* =========================
+
+/* =====================================================
    TÍNH GIÁ
-========================= */
+===================================================== */
 
 function calculatePrice() {
+
 
   const type =
     $("elevatorType").value;
 
+
   const capacity =
     Number($("capacity").value);
+
 
   const stop =
     Number($("stop").value);
 
+
   const cabin =
     $("cabin").value;
 
+
   const door =
     $("door").value;
+
 
   const machine =
     $("machine").value;
 
 
-  /*
-    Số cửa = Stop + 1
-  */
+
+  // -----------------------------------------
+  // SỐ CỬA
+  // Stop + 1
+  // -----------------------------------------
 
   const doorCount =
     stop + 1;
 
 
-  /*
-    Tải trọng
-  */
+
+  // -----------------------------------------
+  // TẢI TRỌNG
+  // -----------------------------------------
 
   const capacityPrice =
     PRICE_CONFIG.capacity[capacity] || 0;
 
 
-  /*
-    Stop
-  */
+
+  // -----------------------------------------
+  // STOP
+  // -----------------------------------------
 
   const stopPrice =
     Math.max(
@@ -130,16 +105,20 @@ function calculatePrice() {
     PRICE_CONFIG.stop.additional;
 
 
-  /*
-    Khung thép
 
-    Chỉ tính khi chọn
-    Thang Khung thép
-  */
+  // -----------------------------------------
+  // KHUNG THÉP
+  //
+  // Chỉ tính khi chọn:
+  // Thang Khung thép
+  // -----------------------------------------
 
   let steelFramePrice = 0;
 
-  if (type === "khung-thep") {
+
+  if (
+    type === "khung-thep"
+  ) {
 
     steelFramePrice =
       PRICE_CONFIG.steelFrame.base
@@ -154,53 +133,77 @@ function calculatePrice() {
   }
 
 
-  /*
-    Cabin
-  */
+
+  // -----------------------------------------
+  // CABIN
+  // -----------------------------------------
 
   const cabinPrice =
-    PRICE_CONFIG.cabin[cabin] || 0;
+    PRICE_CONFIG
+      .cabin[cabin]
+      .price;
 
 
-  /*
-    Cửa
 
-    Giá x số cửa
-  */
+  // -----------------------------------------
+  // CỬA
+  // -----------------------------------------
 
   const doorUnitPrice =
-    PRICE_CONFIG.door[door] || 0;
+    PRICE_CONFIG
+      .door[door]
+      .price;
+
 
   const doorPrice =
-    doorCount * doorUnitPrice;
+    doorCount *
+    doorUnitPrice;
 
 
-  /*
-    Máy
-  */
+
+  // -----------------------------------------
+  // MÁY
+  // -----------------------------------------
 
   const machinePrice =
-    PRICE_CONFIG.machine[machine] || 0;
+    PRICE_CONFIG
+      .machine[machine]
+      .price;
 
 
-  /*
-    Tổng
-  */
+
+  // -----------------------------------------
+  // TỔNG
+  // -----------------------------------------
 
   const total =
+
     PRICE_CONFIG.basePrice
+
     +
+
     capacityPrice
+
     +
+
     stopPrice
+
     +
+
     steelFramePrice
+
     +
+
     cabinPrice
+
     +
+
     doorPrice
+
     +
+
     machinePrice;
+
 
 
   return {
@@ -240,157 +243,585 @@ function calculatePrice() {
 }
 
 
-/* =========================
-   HIỂN THỊ BÁO GIÁ
-========================= */
+
+/* =====================================================
+   RENDER WEBSITE
+===================================================== */
 
 function renderQuote() {
 
-  const result =
+
+  const r =
     calculatePrice();
 
 
-  /*
-    Thông tin tự động
-  */
 
-  $("stopDisplay").textContent =
-    `${result.stop} Stop`;
-
-  $("doorCount").textContent =
-    `${result.doorCount} cửa`;
+  // -----------------------------------------
+  // THÔNG TIN TỰ ĐỘNG
+  // -----------------------------------------
 
   $("typeDisplay").textContent =
-    LABELS.type[result.type];
+    TYPE_NAME[r.type];
 
 
-  /*
-    Các dòng báo giá
-  */
+  $("stopDisplay").textContent =
+    `${r.stop} Stop`;
+
+
+  $("doorCount").textContent =
+    `${r.doorCount} cửa`;
+
+
+
+  // -----------------------------------------
+  // DANH SÁCH GIÁ
+  // -----------------------------------------
+
+  const rows = [];
+
+
+  // Giá cơ bản
+
+  rows.push({
+
+    name:
+      "Giá thang cơ bản",
+
+    price:
+      PRICE_CONFIG.basePrice,
+
+    base:
+      true
+
+  });
+
+
+
+  // Tải trọng
+
+  rows.push({
+
+    name:
+      `Tải trọng – ${r.capacity} kg`,
+
+    price:
+      r.capacityPrice
+
+  });
+
+
+
+  // Stop
+
+  rows.push({
+
+    name:
+      `Điều chỉnh số Stop – ${r.stop} Stop`,
+
+    price:
+      r.stopPrice
+
+  });
+
+
+
+  // Khung thép
+
+  if (
+    r.type === "khung-thep"
+  ) {
+
+    rows.push({
+
+      name:
+        `Khung thép – ${r.stop} Stop`,
+
+      price:
+        r.steelFramePrice
+
+    });
+
+  }
+
+
+
+  // Cabin
+
+  rows.push({
+
+    name:
+      PRICE_CONFIG.cabin[r.cabin].name,
+
+    price:
+      r.cabinPrice
+
+  });
+
+
+
+  // Cửa
+
+  rows.push({
+
+    name:
+      `${PRICE_CONFIG.door[r.door].name} – ${r.doorCount} cửa × ${money(r.doorUnitPrice)}`,
+
+    price:
+      r.doorPrice
+
+  });
+
+
+
+  // Máy
+
+  rows.push({
+
+    name:
+      `Máy kéo – ${PRICE_CONFIG.machine[r.machine].name}`,
+
+    price:
+      r.machinePrice
+
+  });
+
+
+
+  // -----------------------------------------
+  // HIỂN THỊ
+  // -----------------------------------------
+
+  $("quoteDetails").innerHTML =
+
+    rows.map(row => {
+
+
+      let display;
+
+
+      if (
+        row.base
+      ) {
+
+        display =
+          money(row.price);
+
+      }
+
+      else if (
+        row.price === 0
+      ) {
+
+        display = "—";
+
+      }
+
+      else {
+
+        display =
+          "+ " + money(row.price);
+
+      }
+
+
+      return `
+
+        <div class="quote-row">
+
+          <span>
+            ${row.name}
+          </span>
+
+          <strong
+            class="${row.price === 0 ? "zero" : ""}"
+          >
+            ${display}
+          </strong>
+
+        </div>
+
+      `;
+
+    }).join("");
+
+
+
+  // -----------------------------------------
+  // TỔNG
+  // -----------------------------------------
+
+  $("totalPrice").textContent =
+    money(r.total);
+
+
+
+  // -----------------------------------------
+  // CẬP NHẬT PDF
+  // -----------------------------------------
+
+  renderPrint(r);
+
+}
+
+
+
+/* =====================================================
+   TẠO SỐ BÁO GIÁ
+===================================================== */
+
+function createQuoteNumber() {
+
+
+  const now =
+    new Date();
+
+
+  const yyyy =
+    now.getFullYear();
+
+
+  const mm =
+    String(
+      now.getMonth() + 1
+    ).padStart(2, "0");
+
+
+  const dd =
+    String(
+      now.getDate()
+    ).padStart(2, "0");
+
+
+  const random =
+    String(
+      Math.floor(
+        Math.random() * 10000
+      )
+    ).padStart(4, "0");
+
+
+  return:
+
+    `BG-${yyyy}${mm}${dd}-${random}`;
+
+}
+
+
+
+/* =====================================================
+   RENDER BẢN IN
+===================================================== */
+
+function renderPrint(r) {
+
+
+  const now =
+    new Date();
+
+
+  const dd =
+    String(
+      now.getDate()
+    ).padStart(2, "0");
+
+
+  const mm =
+    String(
+      now.getMonth() + 1
+    ).padStart(2, "0");
+
+
+  const yyyy =
+    now.getFullYear();
+
+
+
+  // -----------------------------------------
+  // SỐ BÁO GIÁ
+  // -----------------------------------------
+
+  $("printQuoteNo").textContent =
+    createQuoteNumber();
+
+
+
+  // -----------------------------------------
+  // NGÀY
+  // -----------------------------------------
+
+  $("printDate").textContent =
+    `${dd}/${mm}/${yyyy}`;
+
+
+
+  // -----------------------------------------
+  // KHÁCH HÀNG
+  // -----------------------------------------
+
+  $("printCustomer").textContent =
+
+    $("customerName")
+      .value
+      .trim()
+      ||
+      "—";
+
+
+  $("printPhone").textContent =
+
+    $("customerPhone")
+      .value
+      .trim()
+      ||
+      "—";
+
+
+  $("printAddress").textContent =
+
+    $("projectAddress")
+      .value
+      .trim()
+      ||
+      "—";
+
+
+
+  // -----------------------------------------
+  // CẤU HÌNH
+  // -----------------------------------------
+
+  $("printType").textContent =
+    TYPE_NAME[r.type];
+
+
+  $("printCapacity").textContent =
+    `${r.capacity} kg`;
+
+
+  $("printStop").textContent =
+    `${r.stop} Stop`;
+
+
+  $("printDoors").textContent =
+    `${r.doorCount} cửa`;
+
+
+  $("printCabin").textContent =
+    PRICE_CONFIG.cabin[r.cabin].name;
+
+
+  $("printDoor").textContent =
+    PRICE_CONFIG.door[r.door].name;
+
+
+  $("printMachine").textContent =
+    PRICE_CONFIG.machine[r.machine].name;
+
+
+
+  // -----------------------------------------
+  // BẢNG GIÁ PDF
+  // -----------------------------------------
 
   const rows = [
 
     [
       "Giá thang cơ bản",
-      PRICE_CONFIG.basePrice,
-      true
+      PRICE_CONFIG.basePrice
     ],
 
     [
-      `Tải trọng – ${LABELS.capacity[result.capacity]}`,
-      result.capacityPrice
+      `Tải trọng – ${r.capacity} kg`,
+      r.capacityPrice
     ],
 
     [
-      `Điều chỉnh số Stop – ${result.stop} Stop`,
-      result.stopPrice
-    ],
-
-    ...(result.type === "khung-thep"
-      ? [
-          [
-            `Khung thép – ${result.stop} Stop`,
-            result.steelFramePrice
-          ]
-        ]
-      : []),
-
-    [
-      LABELS.cabin[result.cabin],
-      result.cabinPrice
-    ],
-
-    [
-      `${LABELS.door[result.door]} – ${result.doorCount} cửa × ${money(result.doorUnitPrice)}`,
-      result.doorPrice
-    ],
-
-    [
-      `Máy kéo – ${LABELS.machine[result.machine]}`,
-      result.machinePrice
+      `Điều chỉnh số Stop – ${r.stop} Stop`,
+      r.stopPrice
     ]
 
   ];
 
 
-  /*
-    Render
-  */
 
-  $("quoteDetails").innerHTML =
-    rows.map(
-      ([label, value, base]) => {
+  if (
+    r.type === "khung-thep"
+  ) {
 
-        const isZero =
-          value === 0;
+    rows.push([
 
-        return `
+      `Khung thép – ${r.stop} Stop`,
 
-          <div class="quote-row">
+      r.steelFramePrice
 
-            <span>
-              ${label}
-            </span>
+    ]);
 
-            <strong
-              class="${isZero ? "zero" : ""}"
-            >
-
-              ${
-                base
-                ? money(value)
-                : isZero
-                  ? "—"
-                  : "+ " + money(value)
-              }
-
-            </strong>
-
-          </div>
-
-        `;
-
-      }
-    ).join("");
+  }
 
 
-  /*
-    Tổng
-  */
 
-  $("totalPrice").textContent =
-    money(result.total);
+  rows.push(
+
+    [
+
+      PRICE_CONFIG.cabin[r.cabin].name,
+
+      r.cabinPrice
+
+    ],
+
+
+    [
+
+      `${PRICE_CONFIG.door[r.door].name} – ${r.doorCount} cửa × ${money(r.doorUnitPrice)}`,
+
+      r.doorPrice
+
+    ],
+
+
+    [
+
+      `Máy kéo – ${PRICE_CONFIG.machine[r.machine].name}`,
+
+      r.machinePrice
+
+    ]
+
+  );
+
+
+
+  $("printPriceRows").innerHTML =
+
+    rows.map(row => {
+
+      const value =
+        row[1] === 0
+          ? "—"
+          : "+ " + money(row[1]);
+
+
+      return `
+
+        <tr>
+
+          <td>
+            ${row[0]}
+          </td>
+
+          <td>
+            ${value}
+          </td>
+
+        </tr>
+
+      `;
+
+    }).join("");
+
+
+
+  // -----------------------------------------
+  // TỔNG PDF
+  // -----------------------------------------
+
+  $("printTotal").textContent =
+    money(r.total);
+
+
+
+  // -----------------------------------------
+  // QR
+  // -----------------------------------------
+
+  createQR();
 
 }
 
 
-/* =========================
-   ĐẶT LẠI
-========================= */
+
+/* =====================================================
+   QR WEBSITE
+===================================================== */
+
+function createQR() {
+
+
+  const box =
+    $("qrcode");
+
+
+  if (!box) return;
+
+
+  box.innerHTML = "";
+
+
+  new QRCode(
+
+    box,
+
+    {
+
+      text:
+        "https://trungythp1-jpg.github.io/Bao-Gia/",
+
+      width:
+        150,
+
+      height:
+        150,
+
+      correctLevel:
+        QRCode.CorrectLevel.H
+
+    }
+
+  );
+
+}
+
+
+
+/* =====================================================
+   RESET
+===================================================== */
 
 function resetForm() {
 
-  $("customerName").value = "";
 
-  $("customerPhone").value = "";
+  $("customerName").value =
+    "";
 
-  $("projectAddress").value = "";
+
+  $("customerPhone").value =
+    "";
+
+
+  $("projectAddress").value =
+    "";
 
 
   $("elevatorType").value =
     "ho-xay";
 
+
   $("capacity").value =
     "350";
+
 
   $("stop").value =
     "4";
 
+
   $("cabin").value =
     "inox-trang";
 
+
   $("door").value =
     "inox-trang";
+
 
   $("machine").value =
     "torin";
@@ -401,33 +832,55 @@ function resetForm() {
 }
 
 
-/* =========================
-   THEO DÕI THAY ĐỔI
-========================= */
 
-[
+/* =====================================================
+   THEO DÕI FORM
+===================================================== */
+
+const fields = [
+
+  "customerName",
+
+  "customerPhone",
+
+  "projectAddress",
+
   "elevatorType",
+
   "capacity",
+
   "stop",
+
   "cabin",
+
   "door",
+
   "machine"
 
-].forEach(
-  id => {
-
-    $(id).addEventListener(
-      "change",
-      renderQuote
-    );
-
-  }
-);
+];
 
 
-/* =========================
-   NÚT
-========================= */
+fields.forEach(id => {
+
+
+  $(id).addEventListener(
+    "input",
+    renderQuote
+  );
+
+
+  $(id).addEventListener(
+    "change",
+    renderQuote
+  );
+
+});
+
+
+
+/* =====================================================
+   BUTTON
+===================================================== */
 
 $("resetBtn")
   .addEventListener(
@@ -438,13 +891,26 @@ $("resetBtn")
 
 $("printBtn")
   .addEventListener(
+
     "click",
-    () => window.print()
+
+    () => {
+
+      renderQuote();
+
+      setTimeout(
+        () => window.print(),
+        150
+      );
+
+    }
+
   );
 
 
-/* =========================
+
+/* =====================================================
    KHỞI ĐỘNG
-========================= */
+===================================================== */
 
 renderQuote();
