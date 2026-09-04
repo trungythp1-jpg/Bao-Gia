@@ -646,6 +646,55 @@
         padding: 14px 18px;
       }
     }
+    /* =========================================================
+   TOPBAR ACTIONS
+========================================================= */
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.back-quote-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 42px;
+  padding: 0 14px;
+
+  border: 1px solid #d8e0dc;
+  border-radius: 9px;
+
+  background: #ffffff;
+  color: #15945d;
+
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 700;
+
+  transition: 0.2s;
+}
+
+.back-quote-btn:hover {
+  background: #f3faf7;
+  border-color: #15945d;
+}
+
+@media (max-width: 600px) {
+
+  .topbar-actions {
+    gap: 7px;
+  }
+
+  .back-quote-btn {
+    height: 38px;
+    padding: 0 10px;
+    font-size: 13px;
+  }
+
+}
   </style>
 </head>
 
@@ -750,41 +799,52 @@
     class="hidden"
   >
 
-    <header class="topbar">
+   <header class="topbar">
 
-      <div class="topbar-left">
+  <div class="topbar-left">
 
-        <div class="mini-logo">
-          <img
-            src="../data/grova_logo.png"
-            alt="GROVA HOLDINGS"
-          >
-        </div>
-
-        <div class="topbar-title">
-
-          <strong>
-            GROVA HOLDINGS
-          </strong>
-
-          <span>
-            Quản trị hệ thống báo giá
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <button
-        id="logoutBtn"
-        class="logout-btn"
-        type="button"
+    <div class="mini-logo">
+      <img
+        src="../data/grova_logo.png"
+        alt="GROVA HOLDINGS"
       >
-        Đăng xuất
-      </button>
+    </div>
 
-    </header>
+    <div class="topbar-title">
+
+      <strong>
+        GROVA HOLDINGS
+      </strong>
+
+      <span>
+        Quản trị hệ thống báo giá
+      </span>
+
+    </div>
+
+  </div>
+
+
+  <div class="topbar-actions">
+
+    <a
+      href="../"
+      class="back-quote-btn"
+    >
+      ← Báo giá
+    </a>
+
+    <button
+      id="logoutBtn"
+      class="logout-btn"
+      type="button"
+    >
+      Đăng xuất
+    </button>
+
+  </div>
+
+</header>
 
 
     <main class="container">
