@@ -17,24 +17,14 @@ function generateQuoteNumber() {
   const now = new Date();
 
   const year = now.getFullYear();
-
-  const month = String(
-    now.getMonth() + 1
-  ).padStart(2, "0");
-
-  const day = String(
-    now.getDate()
-  ).padStart(2, "0");
-
-  const random = String(
-    Math.floor(Math.random() * 10000)
-  ).padStart(4, "0");
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  const random = String(Math.floor(Math.random() * 10000)).padStart(4, "0");
 
   return `BG-${year}${month}${day}-${random}`;
 }
 
-const QUOTE_NUMBER =
-  generateQuoteNumber();
+const QUOTE_NUMBER = generateQuoteNumber();
 
 
 /* =========================
@@ -43,32 +33,17 @@ const QUOTE_NUMBER =
 
 function calculateQuote() {
 
-  const type =
-    $("elevatorType").value;
+  const type = $("elevatorType").value;
+  const capacity = Number($("capacity").value);
+  const stop = Number($("stop").value);
+  const cabin = $("cabin").value;
+  const door = $("door").value;
+  const machine = $("machine").value;
 
-  const capacity =
-    Number($("capacity").value);
-
-  const stop =
-    Number($("stop").value);
-
-  const cabin =
-    $("cabin").value;
-
-  const door =
-    $("door").value;
-
-  const machine =
-    $("machine").value;
-
-
-  const doorCount =
-    stop + 1;
-
+  const doorCount = stop + 1;
 
   const capacityPrice =
     PRICE_CONFIG.capacity[capacity] || 0;
-
 
   const stopPrice =
     Math.max(
@@ -77,9 +52,7 @@ function calculateQuote() {
     ) *
     PRICE_CONFIG.stop.additional;
 
-
   let steelFramePrice = 0;
-
 
   if (type === "khung-thep") {
 
@@ -93,22 +66,17 @@ function calculateQuote() {
 
   }
 
-
   const cabinPrice =
     PRICE_CONFIG.cabin[cabin].price;
-
 
   const doorUnitPrice =
     PRICE_CONFIG.door[door].price;
 
-
   const doorPrice =
     doorCount * doorUnitPrice;
 
-
   const machinePrice =
     PRICE_CONFIG.machine[machine].price;
-
 
   const total =
     PRICE_CONFIG.basePrice +
@@ -119,49 +87,38 @@ function calculateQuote() {
     doorPrice +
     machinePrice;
 
-
   return {
-
     type,
     capacity,
     stop,
     doorCount,
-
     cabin,
     door,
     machine,
-
     capacityPrice,
     stopPrice,
     steelFramePrice,
-
     cabinPrice,
-
     doorUnitPrice,
     doorPrice,
-
     machinePrice,
-
     total
-
   };
 }
 
 
 /* =========================
-   DANH SÁCH HẠNG MỤC GIÁ
+   DANH SÁCH HẠNG MỤC
 ========================= */
 
 function buildPriceRows(quote) {
 
   const rows = [];
 
-
   rows.push({
     name: "Giá thang cơ bản",
     price: PRICE_CONFIG.basePrice
   });
-
 
   if (quote.capacityPrice > 0) {
 
@@ -174,7 +131,6 @@ function buildPriceRows(quote) {
 
   }
 
-
   if (quote.stopPrice > 0) {
 
     rows.push({
@@ -185,7 +141,6 @@ function buildPriceRows(quote) {
     });
 
   }
-
 
   if (quote.type === "khung-thep") {
 
@@ -198,7 +153,6 @@ function buildPriceRows(quote) {
 
   }
 
-
   if (quote.cabinPrice > 0) {
 
     rows.push({
@@ -206,13 +160,11 @@ function buildPriceRows(quote) {
         PRICE_CONFIG.cabin[
           quote.cabin
         ].name,
-
       price:
         quote.cabinPrice
     });
 
   }
-
 
   if (quote.doorPrice > 0) {
 
@@ -223,13 +175,11 @@ function buildPriceRows(quote) {
         ].name} – ${quote.doorCount} cửa × ${money(
           quote.doorUnitPrice
         )}`,
-
       price:
         quote.doorPrice
     });
 
   }
-
 
   if (quote.machinePrice > 0) {
 
@@ -238,13 +188,11 @@ function buildPriceRows(quote) {
         PRICE_CONFIG.machine[
           quote.machine
         ].name,
-
       price:
         quote.machinePrice
     });
 
   }
-
 
   return rows;
 }
@@ -259,27 +207,19 @@ function updateWebsite() {
   const quote =
     calculateQuote();
 
-
   $("typeDisplay").textContent =
-    ELEVATOR_TYPES[
-      quote.type
-    ];
-
+    ELEVATOR_TYPES[quote.type];
 
   $("stopDisplay").textContent =
     `${quote.stop} Stop`;
 
-
   $("doorCount").textContent =
     `${quote.doorCount} cửa`;
-
 
   const rows =
     buildPriceRows(quote);
 
-
   $("quoteDetails").innerHTML =
-
     rows.map(function(row) {
 
       return `
@@ -302,10 +242,8 @@ function updateWebsite() {
 
     }).join("");
 
-
   $("totalPrice").textContent =
     money(quote.total);
-
 
   updatePrintQuote(quote);
 }
@@ -320,18 +258,15 @@ function updatePrintQuote(quote) {
   const now =
     new Date();
 
-
   const day =
     String(
       now.getDate()
     ).padStart(2, "0");
 
-
   const month =
     String(
       now.getMonth() + 1
     ).padStart(2, "0");
-
 
   const year =
     now.getFullYear();
@@ -339,7 +274,6 @@ function updatePrintQuote(quote) {
 
   $("printQuoteNo").textContent =
     QUOTE_NUMBER;
-
 
   $("printDate").textContent =
     `${day}/${month}/${year}`;
@@ -350,12 +284,10 @@ function updatePrintQuote(quote) {
       .value
       .trim() || "—";
 
-
   $("printPhone").textContent =
     $("customerPhone")
       .value
       .trim() || "—";
-
 
   $("printAddress").textContent =
     $("projectAddress")
@@ -364,22 +296,16 @@ function updatePrintQuote(quote) {
 
 
   $("printType").textContent =
-    ELEVATOR_TYPES[
-      quote.type
-    ];
-
+    ELEVATOR_TYPES[quote.type];
 
   $("printCapacity").textContent =
     `${quote.capacity} kg`;
 
-
   $("printStop").textContent =
     `${quote.stop} Stop`;
 
-
   $("printDoors").textContent =
     `${quote.doorCount} cửa`;
-
 
   $("printCabin").textContent =
     PRICE_CONFIG.cabin[
@@ -387,10 +313,12 @@ function updatePrintQuote(quote) {
     ].name;
 
 
+  /* SỬA LỖI LẶP 2 CÁNH MỞ TIM */
+
   $("printDoor").textContent =
     PRICE_CONFIG.door[
       quote.door
-    ].name + " – 2 cánh mở tim";
+    ].name;
 
 
   $("printMachine").textContent =
@@ -404,7 +332,6 @@ function updatePrintQuote(quote) {
 
 
   $("printPriceRows").innerHTML =
-
     rows.map(function(row, index) {
 
       return `
@@ -443,14 +370,9 @@ function updatePrintQuote(quote) {
 
 function resetForm() {
 
-  $("customerName").value =
-    "";
-
-  $("customerPhone").value =
-    "";
-
-  $("projectAddress").value =
-    "";
+  $("customerName").value = "";
+  $("customerPhone").value = "";
+  $("projectAddress").value = "";
 
   $("elevatorType").value =
     "ho-xay";
@@ -469,7 +391,6 @@ function resetForm() {
 
   $("machine").value =
     "torin";
-
 
   updateWebsite();
 }
@@ -499,19 +420,15 @@ function createPDF() {
 function init() {
 
   const fields = [
-
     "customerName",
     "customerPhone",
     "projectAddress",
-
     "elevatorType",
     "capacity",
     "stop",
-
     "cabin",
     "door",
     "machine"
-
   ];
 
 
@@ -523,12 +440,10 @@ function init() {
       return;
     }
 
-
     element.addEventListener(
       "input",
       updateWebsite
     );
-
 
     element.addEventListener(
       "change",
@@ -538,18 +453,16 @@ function init() {
   });
 
 
-  $("resetBtn")
-    .addEventListener(
-      "click",
-      resetForm
-    );
+  $("resetBtn").addEventListener(
+    "click",
+    resetForm
+  );
 
 
-  $("printBtn")
-    .addEventListener(
-      "click",
-      createPDF
-    );
+  $("printBtn").addEventListener(
+    "click",
+    createPDF
+  );
 
 
   updateWebsite();
