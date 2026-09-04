@@ -11,7 +11,6 @@
   --muted: #718078;
   --border: #d7e0dc;
   --white: #ffffff;
-  --danger: #9b4a4a;
 }
 
 html {
@@ -28,6 +27,7 @@ body {
     sans-serif;
   line-height: 1.45;
 }
+
 
 /* =========================
    HEADER
@@ -197,7 +197,12 @@ input:focus,
 select:focus {
   border-color: var(--green);
   box-shadow:
-    0 0 0 3px rgba(47, 128, 101, 0.10);
+    0 0 0 3px rgba(
+      47,
+      128,
+      101,
+      0.10
+    );
 }
 
 .hint {
@@ -412,7 +417,7 @@ select:focus {
 
   @page {
     size: A4 portrait;
-    margin: 8mm 10mm;
+    margin: 6mm 9mm;
   }
 
   html,
@@ -437,9 +442,10 @@ select:focus {
   }
 
   .print-area {
-    font-size: 9.5px;
-    line-height: 1.25;
+    font-size: 8.8px;
+    line-height: 1.18;
   }
+
 
   /* HEADER */
 
@@ -447,8 +453,11 @@ select:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 25mm;
-    padding-bottom: 4mm;
+
+    min-height: 22mm;
+
+    padding-bottom: 3mm;
+
     border-bottom: 1.2px solid #378266;
   }
 
@@ -458,9 +467,12 @@ select:focus {
 
   .print-logo-image {
     display: block;
-    width: 52mm;
+
+    width: 48mm;
     height: auto;
-    max-height: 25mm;
+
+    max-height: 22mm;
+
     object-fit: contain;
     object-position: left center;
   }
@@ -471,128 +483,193 @@ select:focus {
   }
 
   .print-title h1 {
-    margin: 0 0 3px;
+    margin: 0 0 2px;
+
     color: #172a22;
-    font-size: 20px;
-    line-height: 1.15;
+
+    font-size: 18px;
+    line-height: 1.1;
   }
 
   .print-title p {
-    margin: 2px 0;
+    margin: 1px 0;
+
     color: #65736d;
-    font-size: 9px;
+
+    font-size: 8px;
   }
 
-  /* SECTION TITLE */
 
-  .print-customer h2,
-  .print-config h2,
-  .print-prices h2,
-  .print-notes h2 {
-    margin: 0 0 3mm;
-    padding: 1.9mm 3mm;
-    border-left: 2mm solid #378266;
-    background: #eaf4ef;
-    color: #316e59;
-    font-size: 10.5px;
-    letter-spacing: 0.5px;
-  }
+  /* SECTION */
 
   .print-customer,
   .print-config,
   .print-prices,
   .print-notes {
-    margin-top: 4mm;
+    margin-top: 2.8mm;
   }
+
+  .print-customer h2,
+  .print-config h2,
+  .print-prices h2,
+  .print-notes h2 {
+
+    margin: 0 0 2mm;
+
+    padding: 1.5mm 2.5mm;
+
+    border-left: 1.6mm solid #378266;
+
+    background: #eaf4ef;
+
+    color: #316e59;
+
+    font-size: 9.2px;
+
+    letter-spacing: 0.4px;
+  }
+
 
   /* CUSTOMER */
 
   .customer-grid {
+
     display: grid;
-    grid-template-columns: 1fr 1fr;
+
+    grid-template-columns:
+      1fr 1fr;
+
     border: 1px solid #d5ddd9;
-    min-height: 19mm;
-    padding: 3mm 4mm;
+
+    min-height: 15mm;
+
+    padding: 2.5mm 3mm;
   }
 
   .customer-grid div {
+
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
   }
 
   .customer-grid span {
-    margin-bottom: 1mm;
+
+    margin-bottom: 0.6mm;
+
     color: #87918d;
-    font-size: 7.5px;
+
+    font-size: 6.8px;
+
     font-weight: 700;
   }
 
   .customer-grid strong {
+
     color: #26342e;
-    font-size: 10px;
+
+    font-size: 8.8px;
   }
 
   .customer-address {
+
     grid-column: 1 / -1;
-    margin-top: 2mm;
+
+    margin-top: 1.2mm;
   }
 
-  /* TABLES */
+
+  /* TABLE */
 
   .print-area table {
+
     width: 100%;
+
     border-collapse: collapse;
+
     table-layout: fixed;
   }
 
   .print-area td,
   .print-area th {
+
     border: 1px solid #d4ddd8;
-    padding: 2.1mm 2.5mm;
+
+    padding: 1.6mm 2mm;
+
     vertical-align: middle;
   }
 
+
+  /* CONFIG */
+
+  .print-config table {
+    page-break-inside: avoid;
+  }
+
+  .print-config tr {
+    page-break-inside: avoid;
+  }
+
   .print-config td {
-    font-size: 9px;
+
+    font-size: 8px;
   }
 
   .print-config td:nth-child(1),
   .print-config td:nth-child(3) {
-    width: 18%;
+
+    width: 17%;
+
     background: #f1f5f3;
+
     font-weight: 700;
+
     color: #52615a;
   }
 
   .print-config td:nth-child(2) {
-    width: 32%;
+    width: 33%;
   }
 
   .print-config td:nth-child(4) {
-    width: 32%;
+    width: 33%;
   }
+
 
   /* PRICE TABLE */
 
   .print-prices table {
+
+    page-break-inside: avoid;
+  }
+
+  .print-prices tr {
+
     page-break-inside: avoid;
   }
 
   .print-prices th {
+
     background: #edf5f1;
+
     color: #316e59;
+
     font-weight: 800;
-    font-size: 8.8px;
+
+    font-size: 8px;
+
     text-align: center;
   }
 
   .print-prices th:first-child {
-    width: 9%;
+    width: 8%;
   }
 
   .print-prices th:nth-child(2) {
-    width: 66%;
+    width: 67%;
   }
 
   .print-prices th:nth-child(3) {
@@ -600,101 +677,142 @@ select:focus {
   }
 
   .print-prices td {
-    font-size: 8.8px;
+
+    font-size: 7.9px;
   }
 
   .print-prices td:first-child {
+
     text-align: center;
   }
 
   .print-prices td:last-child {
+
     text-align: right;
+
     white-space: nowrap;
+
     font-weight: 700;
   }
 
-  .print-prices tr {
-    page-break-inside: avoid;
-  }
 
   /* TOTAL */
 
   .print-total {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
-    margin-top: 4mm;
-    padding: 4mm 5mm;
+
+    margin-top: 2.8mm;
+
+    padding: 3mm 4mm;
+
     background: #378266;
+
     color: #ffffff;
   }
 
   .print-total span {
+
     display: block;
-    font-size: 11px;
+
+    font-size: 9.5px;
+
     font-weight: 800;
   }
 
   .print-total small {
+
     display: block;
-    margin-top: 1mm;
+
+    margin-top: 0.5mm;
+
     opacity: 0.85;
-    font-size: 7.5px;
+
+    font-size: 6.8px;
   }
 
   .print-total strong {
-    font-size: 20px;
+
+    font-size: 17px;
+
     white-space: nowrap;
   }
+
 
   /* NOTES */
 
   .print-notes {
-    margin-top: 3.5mm;
+
+    margin-top: 2.5mm;
   }
 
   .print-notes h2 {
-    margin-bottom: 2mm;
+
+    margin-bottom: 1.5mm;
   }
 
   .print-notes ul {
+
     margin: 0;
-    padding-left: 5mm;
+
+    padding-left: 4.5mm;
   }
 
   .print-notes li {
-    margin-bottom: 1.2mm;
-    font-size: 8.3px;
+
+    margin-bottom: 0.7mm;
+
+    font-size: 7.5px;
   }
+
 
   /* FOOTER */
 
   .print-footer {
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: flex-end;
-    margin-top: 5mm;
-    padding-top: 3mm;
+
+    margin-top: 3mm;
+
+    padding-top: 2mm;
+
     border-top: 1px solid #d5ddd9;
-    color: #718078;
+
   }
 
   .print-footer div {
+
     display: flex;
+
     flex-direction: column;
   }
 
   .print-footer strong {
+
     color: #378266;
-    font-size: 9px;
+
+    font-size: 8px;
   }
 
   .print-footer span {
-    font-size: 7px;
-    margin-top: 1mm;
+
+    color: #718078;
+
+    font-size: 6.2px;
+
+    margin-top: 0.6mm;
   }
 
   .print-footer > span {
+
     text-align: right;
   }
 
