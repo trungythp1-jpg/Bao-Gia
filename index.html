@@ -51,7 +51,69 @@
     #wardHint{min-height:18px}
     @media(max-width:700px){.address-grid{grid-template-columns:1fr}.address-detail-field{grid-column:auto}}
   </style>
+<style id="grova-thank-you-style">
 
+  .print-thank-you {
+    display: none;
+  }
+
+  @media print {
+
+    #printArea .print-thank-you {
+
+      display: block !important;
+
+      width: 100% !important;
+
+      margin-top: 2mm !important;
+      margin-bottom: 8mm !important;
+
+      padding: 5mm 8mm 4mm 8mm !important;
+
+      text-align: center !important;
+
+      font-family:
+        "Segoe Print",
+        "Bradley Hand",
+        "Comic Sans MS",
+        cursive !important;
+
+      color: #315f50 !important;
+
+      line-height: 1.7 !important;
+
+      break-inside: avoid !important;
+      page-break-inside: avoid !important;
+
+    }
+
+
+    #printArea .print-thank-you p {
+
+      margin: 1mm 0 !important;
+
+      font-size: 11px !important;
+
+      font-weight: 400 !important;
+
+      line-height: 1.7 !important;
+
+    }
+
+
+    #printArea .print-thank-you .thank-you-highlight {
+
+      margin-top: 2.5mm !important;
+
+      font-size: 12px !important;
+
+      font-weight: 600 !important;
+
+    }
+
+  }
+
+</style>
 
 <style id="grova-print-readable">
 
@@ -1671,7 +1733,31 @@
 
     </div>
 
+    </div>
 
+
+    <!-- PRINT THANK YOU -->
+
+    <div class="print-thank-you">
+
+      <p>
+        Cảm ơn Quý khách đã quan tâm đến GROVA.
+      </p>
+
+      <p>
+        Hy vọng chúng tôi sẽ có cơ hội được đồng hành cùng Quý khách.
+      </p>
+
+      <p class="thank-you-highlight">
+        Trân trọng và cảm ơn sự tin tưởng của Quý khách!
+      </p>
+
+    </div>
+
+
+    <!-- PRINT NOTES -->
+
+    <div class="print-notes">
 
     <!-- PRINT NOTES -->
 
