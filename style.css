@@ -52,28 +52,33 @@ body {
 
 
 /* =========================================================
-   HEADER
+   HEADER — GỌN & PREMIUM
 ========================================================= */
 
 .header {
   position: relative;
+
   z-index: 10;
 
-  background: rgba(255, 255, 255, 0.94);
+  background:
+    rgba(255, 255, 255, 0.96);
 
-  border-bottom: 1px solid rgba(47, 128, 101, 0.12);
+  border-bottom:
+    1px solid rgba(47, 128, 101, 0.12);
 
   backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 .header-inner {
   max-width: 1160px;
 
-  min-height: 76px;
+  min-height: 68px;
 
   margin: auto;
 
-  padding: 0 24px;
+  padding:
+    0 24px;
 
   display: flex;
 
@@ -91,7 +96,7 @@ body {
 }
 
 .main-logo {
-  width: 190px;
+  width: 170px;
 
   height: auto;
 
@@ -107,13 +112,13 @@ body {
 
   align-items: flex-end;
 
-  gap: 2px;
+  gap: 1px;
 }
 
 .header-label {
   color: var(--green);
 
-  font-size: 10px;
+  font-size: 9px;
 
   font-weight: 800;
 
@@ -123,12 +128,12 @@ body {
 .header-status {
   color: var(--muted);
 
-  font-size: 12px;
+  font-size: 11px;
 }
 
 
 /* =========================================================
-   HERO
+   HERO — GỌN HƠN
 ========================================================= */
 
 .hero {
@@ -136,15 +141,16 @@ body {
 
   max-width: 1160px;
 
-  min-height: 300px;
+  min-height: 250px;
 
-  margin: 24px auto 0;
+  margin: 18px auto 0;
 
   overflow: hidden;
 
-  border-radius: 26px;
+  border-radius: 24px;
 
-  border: 1px solid rgba(47, 128, 101, 0.16);
+  border:
+    1px solid rgba(47, 128, 101, 0.16);
 
   background:
     linear-gradient(
@@ -155,7 +161,7 @@ body {
     );
 
   box-shadow:
-    0 18px 55px rgba(28, 73, 56, 0.08);
+    0 16px 48px rgba(28, 73, 56, 0.075);
 }
 
 .hero::after {
@@ -180,9 +186,10 @@ body {
 
 .hero-content {
   position: relative;
+
   z-index: 2;
 
-  min-height: 296px;
+  min-height: 246px;
 
   display: flex;
 
@@ -194,14 +201,15 @@ body {
 
   text-align: center;
 
-  padding: 42px 24px;
+  padding:
+    28px 24px;
 }
 
 .hero-glow {
   position: absolute;
 
-  width: 280px;
-  height: 280px;
+  width: 260px;
+  height: 260px;
 
   border-radius: 50%;
 
@@ -212,6 +220,7 @@ body {
 
 .hero-glow-1 {
   right: -90px;
+
   top: -110px;
 
   background:
@@ -224,6 +233,7 @@ body {
 
 .hero-glow-2 {
   left: -100px;
+
   bottom: -150px;
 
   background:
@@ -243,7 +253,7 @@ body {
 
   color: var(--green);
 
-  font-size: 11px;
+  font-size: 10px;
 
   font-weight: 800;
 
@@ -263,11 +273,13 @@ body {
 }
 
 .hero h1 {
-  margin: 13px 0 8px;
+  margin:
+    10px 0 6px;
 
   color: #17382d;
 
-  font-size: clamp(31px, 5vw, 48px);
+  font-size:
+    clamp(30px, 5vw, 46px);
 
   line-height: 1.02;
 
@@ -297,9 +309,9 @@ body {
 
   color: var(--muted);
 
-  font-size: 14px;
+  font-size: 13px;
 
-  line-height: 1.65;
+  line-height: 1.55;
 }
 
 .hero-meta {
@@ -309,17 +321,20 @@ body {
 
   justify-content: center;
 
-  gap: 22px;
+  gap: 20px;
 
-  margin-top: 24px;
+  margin-top: 18px;
 
-  padding: 10px 17px;
+  padding:
+    9px 16px;
 
-  border: 1px solid rgba(47, 128, 101, 0.12);
+  border:
+    1px solid rgba(47, 128, 101, 0.12);
 
-  border-radius: 14px;
+  border-radius: 13px;
 
-  background: rgba(255, 255, 255, 0.72);
+  background:
+    rgba(255, 255, 255, 0.76);
 
   box-shadow:
     0 7px 25px rgba(35, 79, 63, 0.05);
@@ -330,14 +345,14 @@ body {
 
   align-items: center;
 
-  gap: 9px;
+  gap: 8px;
 
   text-align: left;
 }
 
 .meta-icon {
-  width: 27px;
-  height: 27px;
+  width: 26px;
+  height: 26px;
 
   display: flex;
 
@@ -364,19 +379,19 @@ body {
 .hero-meta-item small {
   color: var(--muted);
 
-  font-size: 9px;
+  font-size: 8px;
 }
 
 .hero-meta-item strong {
   color: var(--green-deep);
 
-  font-size: 12px;
+  font-size: 11px;
 }
 
 .hero-divider {
   width: 1px;
 
-  height: 30px;
+  height: 28px;
 
   background: var(--border);
 }
@@ -389,9 +404,11 @@ body {
 .container {
   max-width: 1160px;
 
-  margin: 28px auto 60px;
+  margin:
+    24px auto 60px;
 
-  padding: 0 24px;
+  padding:
+    0 24px;
 }
 
 
@@ -410,7 +427,8 @@ body {
 
   background: var(--white);
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 20px;
 
@@ -521,7 +539,8 @@ body {
 }
 
 .section-head p {
-  margin: 4px 0 0;
+  margin:
+    4px 0 0;
 
   color: var(--muted);
 
@@ -540,7 +559,8 @@ body {
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  gap: 18px 20px;
+  gap:
+    18px 20px;
 }
 
 .form-group {
@@ -571,9 +591,11 @@ select {
 
   min-height: 48px;
 
-  padding: 11px 14px;
+  padding:
+    11px 14px;
 
-  border: 1px solid #d8e2dd;
+  border:
+    1px solid #d8e2dd;
 
   border-radius: 11px;
 
@@ -625,7 +647,8 @@ select:focus {
   width: 24px;
   height: 24px;
 
-  transform: translateY(-50%);
+  transform:
+    translateY(-50%);
 
   display: flex;
 
@@ -667,7 +690,8 @@ select:focus {
 
   padding-top: 22px;
 
-  border-top: 1px solid #e7eeeb;
+  border-top:
+    1px solid #e7eeeb;
 }
 
 .summary-label {
@@ -700,7 +724,8 @@ select:focus {
 
   min-height: 66px;
 
-  padding: 11px 13px;
+  padding:
+    11px 13px;
 
   background:
     linear-gradient(
@@ -709,7 +734,8 @@ select:focus {
       #f1f8f4
     );
 
-  border: 1px solid #deebe5;
+  border:
+    1px solid #deebe5;
 
   border-radius: 13px;
 }
@@ -729,7 +755,8 @@ select:focus {
 
   background: #ffffff;
 
-  border: 1px solid #dce9e3;
+  border:
+    1px solid #dce9e3;
 
   color: var(--green);
 
@@ -786,7 +813,8 @@ select:focus {
   grid-template-columns:
     1fr 190px;
 
-  padding: 0 15px 8px;
+  padding:
+    0 15px 8px;
 
   color: #93a099;
 
@@ -804,7 +832,8 @@ select:focus {
 .quote-details {
   overflow: hidden;
 
-  border: 1px solid #dfe8e4;
+  border:
+    1px solid #dfe8e4;
 
   border-radius: 13px;
 
@@ -822,9 +851,11 @@ select:focus {
 
   min-height: 50px;
 
-  padding: 10px 15px;
+  padding:
+    10px 15px;
 
-  border-bottom: 1px solid #edf1ef;
+  border-bottom:
+    1px solid #edf1ef;
 
   color: #4d5c55;
 
@@ -874,7 +905,8 @@ select:focus {
 
   overflow: hidden;
 
-  padding: 19px 22px;
+  padding:
+    19px 22px;
 
   border-radius: 15px;
 
@@ -905,11 +937,13 @@ select:focus {
 
   border-radius: 50%;
 
-  background: rgba(255, 255, 255, 0.08);
+  background:
+    rgba(255, 255, 255, 0.08);
 }
 
 .total-content {
   position: relative;
+
   z-index: 1;
 }
 
@@ -951,9 +985,11 @@ select:focus {
 
 .total-box strong {
   position: relative;
+
   z-index: 1;
 
-  font-size: clamp(21px, 4vw, 28px);
+  font-size:
+    clamp(21px, 4vw, 28px);
 
   font-weight: 900;
 
@@ -982,7 +1018,8 @@ select:focus {
 
   list-style: none;
 
-  border: 1px solid #e0e8e4;
+  border:
+    1px solid #e0e8e4;
 
   border-radius: 13px;
 
@@ -996,9 +1033,11 @@ select:focus {
 
   gap: 12px;
 
-  padding: 12px 14px;
+  padding:
+    12px 14px;
 
-  border-bottom: 1px solid #edf1ef;
+  border-bottom:
+    1px solid #edf1ef;
 
   color: #596760;
 
@@ -1083,7 +1122,8 @@ select:focus {
 
   color: #52625a;
 
-  border: 1px solid #dce5e1;
+  border:
+    1px solid #dce5e1;
 }
 
 .btn.print {
@@ -1116,23 +1156,29 @@ select:focus {
   width: 60px;
   height: 100%;
 
-  transform: skewX(-20deg);
+  transform:
+    skewX(-20deg);
 
-  background: rgba(255, 255, 255, 0.13);
+  background:
+    rgba(255, 255, 255, 0.13);
 
-  transition: left 0.5s ease;
+  transition:
+    left 0.5s ease;
 }
 
 .btn.print:hover::after {
-  left: calc(100% + 80px);
+  left:
+    calc(100% + 80px);
 }
 
 .btn:hover {
-  transform: translateY(-1px);
+  transform:
+    translateY(-1px);
 }
 
 .btn:active {
-  transform: translateY(0);
+  transform:
+    translateY(0);
 }
 
 .btn.reset:hover {
@@ -1166,6 +1212,7 @@ select:focus {
 
 /* =========================================================
    PRINT AREA
+   GIỮ NGUYÊN PHẦN PDF
 ========================================================= */
 
 .print-area {
@@ -1180,50 +1227,58 @@ select:focus {
 @media (max-width: 760px) {
 
   .header-inner {
-    min-height: 67px;
+    min-height: 62px;
 
-    padding: 0 16px;
+    padding:
+      0 16px;
   }
 
   .main-logo {
-    width: 155px;
+    width: 150px;
   }
 
   .header-info {
     display: none;
   }
 
+
+  /* HERO MOBILE */
+
   .hero {
-    min-height: 270px;
+    min-height: 235px;
 
     margin:
-      14px 12px 0;
+      12px 12px 0;
 
-    border-radius: 21px;
+    border-radius: 20px;
   }
 
   .hero-content {
-    min-height: 266px;
+    min-height: 231px;
 
-    padding: 34px 17px;
+    padding:
+      27px 17px;
   }
 
   .hero h1 {
-    font-size: 32px;
+    font-size: 31px;
 
     letter-spacing: -1px;
   }
 
   .hero p {
     font-size: 12px;
+
+    line-height: 1.5;
   }
 
   .hero-meta {
     gap: 13px;
 
-    margin-top: 20px;
+    margin-top: 17px;
 
-    padding: 9px 12px;
+    padding:
+      8px 12px;
   }
 
   .hero-meta-item {
@@ -1234,19 +1289,30 @@ select:focus {
     height: 25px;
   }
 
-  .container {
-    margin-top: 18px;
 
-    padding: 0 12px;
+  /* MAIN */
+
+  .container {
+    margin-top: 17px;
+
+    padding:
+      0 12px;
   }
 
+
+  /* CARD */
+
   .card {
-    padding: 19px;
+    padding:
+      19px;
 
     border-radius: 17px;
 
     margin-bottom: 14px;
   }
+
+
+  /* SECTION */
 
   .section-head {
     gap: 11px;
@@ -1277,6 +1343,9 @@ select:focus {
     font-size: 11px;
   }
 
+
+  /* FORM */
+
   .customer-form,
   .config-grid {
     grid-template-columns: 1fr;
@@ -1288,6 +1357,9 @@ select:focus {
     grid-column: auto;
   }
 
+
+  /* SUMMARY */
+
   .summary-grid {
     grid-template-columns: 1fr;
 
@@ -1298,6 +1370,9 @@ select:focus {
     min-height: 58px;
   }
 
+
+  /* PRICE */
+
   .price-header {
     grid-template-columns:
       1fr 125px;
@@ -1306,7 +1381,8 @@ select:focus {
   .quote-row {
     min-height: 56px;
 
-    padding: 10px 12px;
+    padding:
+      10px 12px;
 
     font-size: 11px;
   }
@@ -1315,6 +1391,9 @@ select:focus {
     font-size: 11px;
   }
 
+
+  /* TOTAL */
+
   .total-box {
     align-items: flex-start;
 
@@ -1322,12 +1401,16 @@ select:focus {
 
     gap: 7px;
 
-    padding: 17px;
+    padding:
+      17px;
   }
 
   .total-box strong {
     font-size: 23px;
   }
+
+
+  /* BUTTONS */
 
   .buttons {
     grid-template-columns: 1fr;
@@ -1350,6 +1433,25 @@ select:focus {
 
 @media (max-width: 390px) {
 
+  .header-inner {
+    min-height: 60px;
+  }
+
+  .main-logo {
+    width: 142px;
+  }
+
+  .hero {
+    min-height: 225px;
+  }
+
+  .hero-content {
+    min-height: 221px;
+
+    padding:
+      24px 15px;
+  }
+
   .hero h1 {
     font-size: 28px;
   }
@@ -1357,7 +1459,8 @@ select:focus {
   .hero-meta {
     width: 100%;
 
-    justify-content: space-around;
+    justify-content:
+      space-around;
   }
 
   .hero-meta-item div {
@@ -1374,6 +1477,7 @@ select:focus {
 
 /* =========================================================
    PRINT / PDF
+   GIỮ NGUYÊN LOGIC PDF HIỆN TẠI
 ========================================================= */
 
 @media print {
@@ -1381,7 +1485,8 @@ select:focus {
   @page {
     size: A4 portrait;
 
-    margin: 6mm 9mm;
+    margin:
+      6mm 9mm;
   }
 
   html,
@@ -1390,7 +1495,8 @@ select:focus {
 
     padding: 0 !important;
 
-    background: #ffffff !important;
+    background:
+      #ffffff !important;
   }
 
   body > * {
@@ -1422,15 +1528,18 @@ select:focus {
   .print-header {
     display: flex;
 
-    justify-content: space-between;
+    justify-content:
+      space-between;
 
     align-items: center;
 
     min-height: 22mm;
 
-    padding-bottom: 3mm;
+    padding-bottom:
+      3mm;
 
-    border-bottom: 1.2px solid #378266;
+    border-bottom:
+      1.2px solid #378266;
   }
 
   .print-brand {
@@ -1448,7 +1557,8 @@ select:focus {
 
     object-fit: contain;
 
-    object-position: left center;
+    object-position:
+      left center;
   }
 
   .print-title {
@@ -1458,7 +1568,8 @@ select:focus {
   }
 
   .print-title h1 {
-    margin: 0 0 2px;
+    margin:
+      0 0 2px;
 
     color: #172a22;
 
@@ -1468,7 +1579,8 @@ select:focus {
   }
 
   .print-title p {
-    margin: 1px 0;
+    margin:
+      1px 0;
 
     color: #65736d;
 
@@ -1482,26 +1594,34 @@ select:focus {
   .print-config,
   .print-prices,
   .print-notes {
-    margin-top: 2.8mm;
+    margin-top:
+      2.8mm;
   }
 
   .print-customer h2,
   .print-config h2,
   .print-prices h2,
   .print-notes h2 {
-    margin: 0 0 2mm;
+    margin:
+      0 0 2mm;
 
-    padding: 1.5mm 2.5mm;
+    padding:
+      1.5mm 2.5mm;
 
-    border-left: 1.6mm solid #378266;
+    border-left:
+      1.6mm solid #378266;
 
-    background: #eaf4ef;
+    background:
+      #eaf4ef;
 
-    color: #316e59;
+    color:
+      #316e59;
 
-    font-size: 9.2px;
+    font-size:
+      9.2px;
 
-    letter-spacing: 0.4px;
+    letter-spacing:
+      0.4px;
   }
 
 
@@ -1513,11 +1633,14 @@ select:focus {
     grid-template-columns:
       1fr 1fr;
 
-    border: 1px solid #d5ddd9;
+    border:
+      1px solid #d5ddd9;
 
-    min-height: 15mm;
+    min-height:
+      15mm;
 
-    padding: 2.5mm 3mm;
+    padding:
+      2.5mm 3mm;
   }
 
   .customer-grid div {
@@ -1529,25 +1652,33 @@ select:focus {
   }
 
   .customer-grid span {
-    margin-bottom: 0.6mm;
+    margin-bottom:
+      0.6mm;
 
-    color: #87918d;
+    color:
+      #87918d;
 
-    font-size: 6.8px;
+    font-size:
+      6.8px;
 
-    font-weight: 700;
+    font-weight:
+      700;
   }
 
   .customer-grid strong {
-    color: #26342e;
+    color:
+      #26342e;
 
-    font-size: 8.8px;
+    font-size:
+      8.8px;
   }
 
   .customer-address {
-    grid-column: 1 / -1;
+    grid-column:
+      1 / -1;
 
-    margin-top: 1.2mm;
+    margin-top:
+      1.2mm;
   }
 
 
@@ -1556,103 +1687,132 @@ select:focus {
   .print-area table {
     width: 100%;
 
-    border-collapse: collapse;
+    border-collapse:
+      collapse;
 
-    table-layout: fixed;
+    table-layout:
+      fixed;
   }
 
   .print-area td,
   .print-area th {
-    border: 1px solid #d4ddd8;
+    border:
+      1px solid #d4ddd8;
 
-    padding: 1.6mm 2mm;
+    padding:
+      1.6mm 2mm;
 
-    vertical-align: middle;
+    vertical-align:
+      middle;
   }
 
 
   /* CONFIG */
 
   .print-config table {
-    page-break-inside: avoid;
+    page-break-inside:
+      avoid;
   }
 
   .print-config tr {
-    page-break-inside: avoid;
+    page-break-inside:
+      avoid;
   }
 
   .print-config td {
-    font-size: 8px;
+    font-size:
+      8px;
   }
 
   .print-config td:nth-child(1),
   .print-config td:nth-child(3) {
-    width: 17%;
+    width:
+      17%;
 
-    background: #f1f5f3;
+    background:
+      #f1f5f3;
 
-    font-weight: 700;
+    font-weight:
+      700;
 
-    color: #52615a;
+    color:
+      #52615a;
   }
 
   .print-config td:nth-child(2) {
-    width: 33%;
+    width:
+      33%;
   }
 
   .print-config td:nth-child(4) {
-    width: 33%;
+    width:
+      33%;
   }
 
 
   /* PRICE TABLE */
 
   .print-prices table {
-    page-break-inside: avoid;
+    page-break-inside:
+      avoid;
   }
 
   .print-prices tr {
-    page-break-inside: avoid;
+    page-break-inside:
+      avoid;
   }
 
   .print-prices th {
-    background: #edf5f1;
+    background:
+      #edf5f1;
 
-    color: #316e59;
+    color:
+      #316e59;
 
-    font-weight: 800;
+    font-weight:
+      800;
 
-    font-size: 8px;
+    font-size:
+      8px;
 
-    text-align: center;
+    text-align:
+      center;
   }
 
   .print-prices th:first-child {
-    width: 8%;
+    width:
+      8%;
   }
 
   .print-prices th:nth-child(2) {
-    width: 67%;
+    width:
+      67%;
   }
 
   .print-prices th:nth-child(3) {
-    width: 25%;
+    width:
+      25%;
   }
 
   .print-prices td {
-    font-size: 7.9px;
+    font-size:
+      7.9px;
   }
 
   .print-prices td:first-child {
-    text-align: center;
+    text-align:
+      center;
   }
 
   .print-prices td:last-child {
-    text-align: right;
+    text-align:
+      right;
 
-    white-space: nowrap;
+    white-space:
+      nowrap;
 
-    font-weight: 700;
+    font-weight:
+      700;
   }
 
 
@@ -1661,64 +1821,85 @@ select:focus {
   .print-total {
     display: flex;
 
-    justify-content: space-between;
+    justify-content:
+      space-between;
 
-    align-items: center;
+    align-items:
+      center;
 
-    margin-top: 2.8mm;
+    margin-top:
+      2.8mm;
 
-    padding: 3mm 4mm;
+    padding:
+      3mm 4mm;
 
-    background: #378266;
+    background:
+      #378266;
 
-    color: #ffffff;
+    color:
+      #ffffff;
   }
 
   .print-total span {
-    display: block;
+    display:
+      block;
 
-    font-size: 9.5px;
+    font-size:
+      9.5px;
 
-    font-weight: 800;
+    font-weight:
+      800;
   }
 
   .print-total small {
-    display: block;
+    display:
+      block;
 
-    margin-top: 0.5mm;
+    margin-top:
+      0.5mm;
 
-    opacity: 0.85;
+    opacity:
+      0.85;
 
-    font-size: 6.8px;
+    font-size:
+      6.8px;
   }
 
   .print-total strong {
-    font-size: 17px;
+    font-size:
+      17px;
 
-    white-space: nowrap;
+    white-space:
+      nowrap;
   }
 
 
   /* NOTES */
 
   .print-notes {
-    margin-top: 2.5mm;
+    margin-top:
+      2.5mm;
   }
 
   .print-notes h2 {
-    margin-bottom: 1.5mm;
+    margin-bottom:
+      1.5mm;
   }
 
   .print-notes ul {
-    margin: 0;
+    margin:
+      0;
 
-    padding-left: 4.5mm;
+    padding-left:
+      4.5mm;
   }
 
   .print-notes li {
-    margin-bottom: 0.7mm;
+    margin-bottom:
+      0.7mm;
 
-    font-size: 7.5px;
+    font-size:
+      7.5px;
   }
 
 
@@ -1727,39 +1908,51 @@ select:focus {
   .print-footer {
     display: flex;
 
-    justify-content: space-between;
+    justify-content:
+      space-between;
 
-    align-items: flex-end;
+    align-items:
+      flex-end;
 
-    margin-top: 3mm;
+    margin-top:
+      3mm;
 
-    padding-top: 2mm;
+    padding-top:
+      2mm;
 
-    border-top: 1px solid #d5ddd9;
+    border-top:
+      1px solid #d5ddd9;
   }
 
   .print-footer div {
     display: flex;
 
-    flex-direction: column;
+    flex-direction:
+      column;
   }
 
   .print-footer strong {
-    color: #378266;
+    color:
+      #378266;
 
-    font-size: 8px;
+    font-size:
+      8px;
   }
 
   .print-footer span {
-    color: #718078;
+    color:
+      #718078;
 
-    font-size: 6.2px;
+    font-size:
+      6.2px;
 
-    margin-top: 0.6mm;
+    margin-top:
+      0.6mm;
   }
 
   .print-footer > span {
-    text-align: right;
+    text-align:
+      right;
   }
 
 }
