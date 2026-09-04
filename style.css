@@ -682,6 +682,57 @@ select:focus {
 
 
 /* =========================================================
+   AUTO SAVE STATUS
+========================================================= */
+
+.save-status {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 7px;
+
+  margin-top: 12px;
+
+  color: #87938d;
+
+  font-size: 9px;
+
+  font-weight: 600;
+}
+
+.save-dot {
+  width: 7px;
+  height: 7px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--green);
+
+  box-shadow:
+    0 0 0 4px rgba(47, 128, 101, 0.09);
+}
+
+.save-status.saving .save-dot {
+  background: var(--blue);
+
+  box-shadow:
+    0 0 0 4px rgba(39, 125, 145, 0.09);
+}
+
+.save-status.error .save-dot {
+  background: #c47a4a;
+
+  box-shadow:
+    0 0 0 4px rgba(196, 122, 74, 0.09);
+}
+
+
+/* =========================================================
    SUMMARY
 ========================================================= */
 
@@ -1355,6 +1406,17 @@ select:focus {
 
   .form-group.full {
     grid-column: auto;
+  }
+
+
+  /* AUTO SAVE */
+
+  .save-status {
+    justify-content: flex-start;
+
+    margin-top: 10px;
+
+    font-size: 8.5px;
   }
 
 
