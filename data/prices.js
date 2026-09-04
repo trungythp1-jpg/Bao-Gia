@@ -123,7 +123,7 @@ const PRICE_CONFIG = {
 
       name: "Cửa kính inox trắng – 2 cánh mở tim",
 
-      price: 4000000
+      price: 3000000
 
     },
 
@@ -132,7 +132,7 @@ const PRICE_CONFIG = {
 
       name: "Cửa kính inox màu – 2 cánh mở tim",
 
-      price: 6500000
+      price: 5000000
 
     },
 
